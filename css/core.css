@@ -1,0 +1,290 @@
+@import url(//fonts.googleapis.com/css?family=League+Spartan);
+
+/* html5doctor.com Reset v1.6.1 (http://html5doctor.com/html-5-reset-stylesheet/) - http://cssreset.com */ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+body{line-height:1;box-sizing:border-box}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}
+
+html{
+	background: url('/images/wood.jpg');
+}
+
+body{
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #333333;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+main{
+	display: -webkit-flex;
+	display: flex;
+	margin: 1.5rem;
+}
+
+article{
+	max-width: 60%;
+	margin-left: 1.5rem;
+}
+
+section{
+	background: #fafafa;
+	border: 1px solid #888;
+	padding: 1.5rem;
+	border-radius: .5rem;
+}
+
+section + section{
+	margin-top: 1.5rem;
+}
+
+footer{
+	text-align: center;
+	margin: 1.5rem;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.8);
+}
+
+code{
+	white-space: pre;
+	font-family: monospace;
+}
+
+h2 code,
+h3 code{
+	font-weight: bold;
+}
+
+h1, h2, h3, h4{
+	font-weight: normal;
+	font-family: 'League Spartan', sans-serif;
+}
+
+header{
+	color: rgba(255,255,255,1);
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+	background: #0B486B;
+	border-bottom: .5rem solid #0A4160;
+	padding: 1.5rem;
+}
+
+header > h1{
+	font-size: 3rem;
+	line-height: 1;
+}
+
+header > h2{
+	font-size: 1.8rem;
+	line-height: 1.2;
+	margin-top: 1rem;
+}
+
+article > h2{
+	display: none;
+}
+
+h2{
+	font-size: 1.8rem;
+	line-height: 1.5;
+}
+
+h3{
+	font-size: 1.5rem;
+	line-height: 1.5;
+	margin: .5rem 0;
+}
+
+h4,
+#introduction h3{
+	font-size: 1.25rem;
+	line-height: 1.5;
+	margin-top: 2rem;
+}
+
+* + article p,
+* + article ol,
+* + article ul,
+* + article li,
+* + article aside,
+* + article code{
+	margin-top: 1rem;
+}
+
+article ol,
+article ul{
+	margin-left: 1rem;
+}
+
+.terminal{
+	font-family: Monospace;
+}
+
+nav{
+	max-width: 30%;
+	background: transparent;
+}
+
+nav ol{
+	list-style-type: none;
+}
+
+nav ol li + li a,
+nav ol li:first-child a{
+	border-top: 1px solid #888;
+}
+
+nav ol li:last-child a{
+	border-bottom: 1px solid #888;
+}
+
+nav ol li:first-child a{
+	border-top-right-radius: .5rem;
+	border-top-left-radius: .5rem;
+}
+
+nav ol li:last-child a{
+	border-bottom-right-radius: .5rem;
+	border-bottom-left-radius: .5rem;
+}
+
+nav ol li a{
+	background: #fafafa;
+	display: block;
+	padding: 1rem 1.5rem;
+	text-decoration: none;
+	border-left: 1px solid #888;
+	border-right: 1px solid #888;
+	line-height: 1;
+}
+
+a:visited,
+nav ol li a:link,
+nav ol li a:visited{
+	color: #0B486B;
+}
+
+
+a:link{
+	color: #357878;
+}
+
+a:visited{
+}
+
+a:hover{
+	color: #3B8686;
+}
+
+nav ol li a:hover{
+	color: #fff;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, .5);
+	background: #3B8686;
+}
+
+code.terminal{
+	color:#fff;
+	background-color:#444;
+	border: 1px solid #888;
+	font-family: Monospace;
+	text-align:left;
+	font-size: 1rem;
+	line-height: 1;
+	padding: 1rem;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, .8);
+	box-shadow: 1px 1px 0px rgba(255, 255, 255, .5) inset;
+	border-radius: 5px;
+	display: block;
+	white-space: normal;
+}
+
+code.terminal.multiline span{
+	display: block;
+}
+
+code.terminal:before,
+code.terminal.multiline span:before{
+	display: inline;
+	margin-right: .5rem;
+	color: #56DA55;
+	font-weight: bold;
+}
+
+code.terminal:not(.multiline):before{
+	content:'user@localhost:';
+}
+
+code.terminal.multiline span:before{
+	content:'user@localhost:';
+}
+
+code.terminal.multiline span + span{
+	margin-top: .5rem;
+}
+
+aside{
+	background: #eee;
+	padding: 1.5rem;
+	border: 1px solid #ddd;
+	border-radius: .5rem;
+}
+
+aside h3:first-child{
+	margin-top: 0;
+}
+
+.back{
+	display: none;
+}
+
+.back a{
+	display: block;
+	border-radius: .25rem;
+	text-align: center;
+	padding: 1rem 0rem;
+	color: #fff;
+	background: #0B486B;
+	box-shadow: .25rem 0rem 0 #0A4160 inset;
+	text-decoration: none;
+}
+
+/* Responsive */
+@media(max-width: 700px){
+	@viewport{
+		zoom: 1.0;
+		width: auto;
+	}
+	
+	@-ms-viewport{
+		zoom: 1.0;
+		width: auto;
+	}
+
+	main{
+		-webkit-flex-direction: column;
+		flex-direction: column;
+		margin: 1rem;
+	}
+
+	nav,
+	article{
+		margin: 0;
+		max-width: 100%;
+	}
+
+	nav{
+		margin-bottom: 1rem;
+	}
+
+	section + section{
+		margin-top: 1rem;
+	}
+
+	h2 code,
+	h3 code{
+		white-space: pre-wrap;
+		word-wrap: break-word;
+	}
+
+	.back{
+		display: block;
+	}
+}

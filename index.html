@@ -118,12 +118,12 @@
 					&lt;?php
 					// Hash the password.  $hashedPassword will be a 60-character string.
 					$hashedPassword = password_hash('my super cool password', PASSWORD_DEFAULT);
-			
+
 					// You can now safely store the contents of $hashedPassword in your database!
-			
+
 					// Check if a user has provided the correct password by comparing what they typed with our hash
 					password_verify('the wrong password', $hashedPassword); // false
-			
+
 					password_verify('my super cool password', $hashedPassword); // true
 					?&gt;</code>
 				<h4>Gotchas</h4>
@@ -145,18 +145,18 @@
 						&lt;?php
 						// Include the phpass library
 						require_once('phpass-0.3/PasswordHash.php');
-			
+
 						// Initialize the hasher without portable hashes (this is more secure)
 						$hasher = new PasswordHash(8, false);
-			
+
 						// Hash the password.  $hashedPassword will be a 60-character string.
 						$hashedPassword = $hasher->HashPassword('my super cool password');
-			
+
 						// You can now safely store the contents of $hashedPassword in your database!
-			
+
 						// Check if a user has provided the correct password by comparing what they typed with our hash
 						$hasher->CheckPassword('the wrong password', $hashedPassword); // false
-			
+
 						$hasher->CheckPassword('my super cool password', $hashedPassword); // true
 						?&gt;</code>
 					<h4>Further reading</h4>
@@ -185,11 +185,11 @@
 						// The PDO options we pass do the following:
 						// \PDO::ATTR_ERRMODE enables exceptions for errors.  This is optional but can be handy.
 						// \PDO::ATTR_PERSISTENT disables persistent connections, which can cause concurrency issues in certain cases.  See "Gotchas".
-						$link = new \PDO(	'mysql:host=your-hostname;dbname=your-db;charset=utf8mb4', 
-											'your-username', 
-											'your-password', 
+						$link = new \PDO(	'mysql:host=your-hostname;dbname=your-db;charset=utf8mb4',
+											'your-username',
+											'your-password',
 											array(
-												\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, 
+												\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
 												\PDO::ATTR_PERSISTENT => false
 											)
 										);
@@ -265,10 +265,10 @@
 					function MyAutoload($className){
 						include_once($className . '.php');
 					}
-			
+
 					// Next, register it with PHP.
 					spl_autoload_register('MyAutoload');
-			
+
 					// Try it out!
 					// Since we haven't included a file defining the MyClass object, our auto-loader will kick in and include MyClass.php.
 					// For this example, assume the MyClass class is defined in the MyClass.php file.
@@ -312,22 +312,22 @@
 					namespace MiddleEarth\Creatures\Dwarves;
 					const GIMLI_ID = 1;
 					define('MiddleEarth\Creatures\Elves\LEGOLAS_ID', 2);
-				
+
 					echo(\MiddleEarth\Creatures\Dwarves\GIMLI_ID);	// 1
 					echo(\MiddleEarth\Creatures\Elves\LEGOLAS_ID);	// 2; note that we used define(), but the namespace is still recognized
-				
+
 					// Now let's declare some bit-shifted constants representing ways to enter Mordor.
 					define('TRANSPORT_METHOD_SNEAKING', 1 &lt;&lt; 0); // OK!
 					const TRANSPORT_METHOD_WALKING = 1 &lt;&lt; 1; // Compile error! const can't use expressions as values
-				
+
 					// Next, conditional constants.
 					define('HOBBITS_FRODO_ID', 1);
-				
+
 					if($isGoingToMordor){
 						define('TRANSPORT_METHOD', TRANSPORT_METHOD_SNEAKING); // OK!
 						const PARTY_LEADER_ID = HOBBITS_FRODO_ID // Compile error: const can't be used in an if block
 					}
-				
+
 					// Finally, class constants
 					class OneRing{
 						const MELTING_POINT_CELSIUS = 1000000; // OK!
@@ -396,16 +396,16 @@
 					apc_store('username-1532', 'Frodo Baggins');
 					apc_store('username-958', 'Aragorn');
 					apc_store('username-6389', 'Gandalf');
-		
+
 					// After storing these values, any PHP script can access them, no matter when it's run!
 					$value = apc_fetch('username-958', $success);
 					if($success === true)
 						print($value); // Aragorn
-			
+
 					$value = apc_fetch('username-1', $success); // $success will be set to boolean false, because this key doesn't exist.
 					if($success !== true) // Note the !==, this checks for true boolean false, not "falsey" values like 0 or empty string.
 						print('Key not found');
-		
+
 					apc_delete('username-958'); // This key will no longer be available.
 					?&gt;</code>
 				<h4>Further reading</h4>
@@ -500,12 +500,12 @@
 					&lt;?php
 					// Include the PHPMailer library
 					require_once('phpmailer-5.2.7/PHPMailerAutoload.php');
-			
+
 					// Passing 'true' enables exceptions.  This is optional and defaults to false.
 					$mailer = new PHPMailer(true);
-			
+
 					// Send a mail from Bilbo Baggins to Gandalf the Grey
-			
+
 					// Set up to, from, and the message body.  The body doesn't have to be HTML; check the PHPMailer documentation for details.
 					$mailer->Sender = 'bbaggins@example.com';
 					$mailer->AddReplyTo('bbaggins@example.com', 'Bilbo Baggins');
@@ -513,7 +513,7 @@
 					$mailer->AddAddress('gandalf@example.com');
 					$mailer->Subject = 'The finest weed in the South Farthing';
 					$mailer->MsgHTML('&lt;p&gt;You really must try it, Gandalf!&lt;/p&gt;&lt;p&gt;-Bilbo&lt;/p&gt;');
-			
+
 					// Set up our connection information.
 					$mailer->IsSMTP();
 					$mailer->SMTPAuth = true;
@@ -522,7 +522,7 @@
 					$mailer->Host = 'my smtp host';
 					$mailer->Username = 'my smtp username';
 					$mailer->Password = 'my smtp password';
-			
+
 					// All done!
 					$mailer->Send();
 					?&gt;</code>
@@ -565,7 +565,7 @@
 					&lt;?php
 					// Oh no!  The user has submitted malicious HTML, and we have to display it in our web app!
 					$evilHtml = '&lt;div onclick="xss();"&gt;Mua-ha-ha!  Twiddling my evil mustache...&lt;/div&gt;';
-			
+
 					// Use the ENT_QUOTES flag to make sure both single and double quotes are escaped.
 					// Use the UTF-8 character encoding if you've stored the text as UTF-8 (as you should have).
 					// See the UTF-8 section in this document for more details.
@@ -581,13 +581,13 @@
 					&lt;?php
 					// Include the HTML Purifier library
 					require_once('htmlpurifier-4.6.0/HTMLPurifier.auto.php');
-			
+
 					// Oh no!  The user has submitted malicious HTML, and we have to display it in our web app!
 					$evilHtml = '&lt;div onclick="xss();"&gt;Mua-ha-ha!  Twiddling my evil mustache...&lt;/div&gt;';
-			
+
 					// Set up the HTML Purifier object with the default configuration.
 					$purifier = new HTMLPurifier(HTMLPurifier_Config::createDefault());
-			
+
 					$safeHtml = $purifier->purify($evilHtml); // $safeHtml is now sanitized.  You can output $safeHtml to your users without fear!
 					?&gt;</code>
 				<h4>Gotchas</h4>
@@ -628,17 +628,17 @@
 					&lt;?php
 					// Tell PHP that we're using UTF-8 strings until the end of the script
 					mb_internal_encoding('UTF-8');
-			
+
 					// Tell PHP that we'll be outputting UTF-8 to the browser
 					mb_http_output('UTF-8');
-			
+
 					// Our UTF-8 test string
 					$string = 'Êl síla erin lû e-govaned vîn.';
-			
+
 					// Transform the string in some way with a multibyte function
 					// Note how we cut the string at a non-Ascii character for demonstration purposes
 					$string = mb_substr($string, 0, 15);
-			
+
 					// Connect to a database to store the transformed string
 					// See the PDO example in this document for more information
 					// Note that we define the character set as utf8mb4 in the PDO connection string
@@ -650,19 +650,19 @@
 											\PDO::ATTR_PERSISTENT => false
 										)
 									);
-					
+
 					// Store our transformed string as UTF-8 in our database
 					// Your DB and tables are in the utf8mb4 character set and collation, right?
 					$handle = $link->prepare('insert into ElvishSentences (Id, Body) values (?, ?)');
 					$handle->bindValue(1, 1, PDO::PARAM_INT);
 					$handle->bindValue(2, $string);
 					$handle->execute();
-			  		
+
 					// Retrieve the string we just stored to prove it was stored correctly
 					$handle = $link->prepare('select * from ElvishSentences where Id = ?');
 					$handle->bindValue(1, 1, PDO::PARAM_INT);
 					$handle->execute();
-					
+
 					// Store the result into an object that we'll output later in our HTML
 					$result = $handle->fetchAll(\PDO::FETCH_OBJ);
 					?&gt;&lt;!doctype html&gt;
@@ -760,25 +760,25 @@
 					&lt;?php
 					$x = 0;
 					$y = null;
-			
+
 					// Is $x null?
 					if($x == null)
 						print('Oops! $x is 0, not null!');
-				
+
 					// Is $y null?
 					if(is_null($y))
 						print('Great, but could be faster.');
-				
+
 					if($y === null)
 						print('Perfect!');
-			
+
 					// Does the string abc contain the character a?
 					if(strpos('abc', 'a'))
 						// GOTCHA!  strpos returns 0, indicating it wishes to return the position of the first character.
 						// But PHP interpretes 0 as false, so we never reach this print statement!
-						print('Found it!'); 
-			
-					//Solution: use !== (the opposite of ===) to see if strpos() returns 0, or boolean false.	
+						print('Found it!');
+
+					//Solution: use !== (the opposite of ===) to see if strpos() returns 0, or boolean false.
 					if(strpos('abc', 'a') !== false)
 						print('Found it for real this time!');
 					?&gt;</code>
