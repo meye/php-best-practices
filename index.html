@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>PHP Best Practices: a short, practical guide for common and confusing PHP tasks</title>
+	<title>PHP Best Practices: 일반적이고 복잡한 PHP 작업을 위한 짧고 실용적인 가이드</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link type="text/css" rel="stylesheet" href="css/core.css" media="screen" />
@@ -19,35 +19,35 @@
 	});
 	</script>
 	<script>
-	(function(i, s, o, g, r, a, m) {
-		i['GoogleAnalyticsObject'] = r;
-		i[r] = i[r] || function() {
-			(i[r].q = i[r].q || []).push(arguments)
-		}, i[r].l = 1 * new Date();
-		a = s.createElement(o),
-			m = s.getElementsByTagName(o)[0];
-		a.async = 1;
-		a.src = g;
-		m.parentNode.insertBefore(a, m)
-	})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-	ga('create', 'UA-35543520-1', 'phpbestpractices.org');
-	ga('send', 'pageview');
+	// (function(i, s, o, g, r, a, m) {
+	// 	i['GoogleAnalyticsObject'] = r;
+	// 	i[r] = i[r] || function() {
+	// 		(i[r].q = i[r].q || []).push(arguments)
+	// 	}, i[r].l = 1 * new Date();
+	// 	a = s.createElement(o),
+	// 		m = s.getElementsByTagName(o)[0];
+	// 	a.async = 1;
+	// 	a.src = g;
+	// 	m.parentNode.insertBefore(a, m)
+	// })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+	//
+	// ga('create', 'UA-35543520-1', 'phpbestpractices.org');
+	// ga('send', 'pageview');
 	</script>
 </head>
 
 <body>
 	<header>
 		<h1>PHP Best Practices</h1>
-		<h2>A short, practical guide for common and confusing PHP tasks</h2>
+		<h2>일반적이고 복잡한 PHP 작업을 위한 짧고 실용적인 가이드</h2>
 	</header>
 	<main>
 		<nav>
 			<ol>
-				<li><a href="#maintainers">Last revised &amp; maintainers</a></li>
-				<li><a href="#introduction">Introduction</a></li>
-				<li><a href="#version">What PHP version are we using?</a></li>
-				<li><a href="#passwords">Storing passwords</a></li>
+				<li><a href="#maintainers">최신 개정판 &amp; 관리자</a></li>
+				<li><a href="#introduction">소개</a></li>
+				<li><a href="#version">어떤 PHP 버전을 사용하나요?</a></li>
+				<li><a href="#passwords">비밀번호 저장하기</a></li>
 				<li><a href="#mysql">PHP and MySQL</a></li>
 				<li><a href="#php-tags">PHP tags</a></li>
 				<li><a href="#auto-loading">Auto-loading classes</a></li>
@@ -69,34 +69,37 @@
 		<article>
 			<h2>PHP Best Practices</h2>
 			<section id="maintainers">
-				<h2>Last revised &amp; maintainers</h2>
-				<p>This document was last reviewed on July 3, 2014. It was last changed on July 3, 2014.</p>
-				<p>It's maintained by me, <a href="https://alexcabal.com" rel="author">Alex Cabal</a>. I've been writing PHP for a long time now, and currently I run <a href="http://www.scribophile.com/">Scribophile, an online writing group for serious writers</a>, <a href="http://writerfolio.com">Writerfolio, an easy online writing portfolio for freelancers</a>, and <a href="https://standardebooks.com">Standard Ebooks, a publisher of illustrated, DRM-free public domain ebooks</a>. On occasion I freelance for projects and clients that interest me.</p>
-				<p><a href="https://alexcabal.com/contact/">Drop me a line</a> if you think I can help you with something, or with suggestions or corrections to this document.</p>
-				<p class="back"><a href="#">Back to top</a></p>
+				<h2>최신 개정판 &amp; 관리자</h2>
+				<p>이 문서는 2014년 7월 3일에 최종 확인했습니다. 2014년 7월 3일에 최종 수정되었습니다.</p>
+				<p>이 문서는 저, <a href="https://alexcabal.com" rel="author">Alex Cabal</a>이 관리하고 있습니다. 저는 오랜 기간 PHP를 작성해왔고, 현재 <a href="http://www.scribophile.com/">진지한 작가를 위한 온라인 글쓰기 그룹인 Scribophile</a>, <a href="http://writerfolio.com">프리랜서를 위한 쉬운 온라인 글쓰기 포트폴리오인 Writerfolio</a>, <a href="https://standardebooks.com">삽화가 들어간 DRM없는 퍼블릭 도메인 eBook을 출판하는 Standard Ebooks</a> 등을 운영하고 있습니다. 가끔 흥미를 갖게하는 프로젝트나 의뢰인들을 위해서 프리랜서로 일합니다.</p>
+				<p>제가 뭔가 도울일이 있거나 이 문서에 어떤 제안이나 정정할 것이 있다면 <a href="https://alexcabal.com/contact/">연락주세요.</a></p>
+				<h3>한국어판 안내</h3>
+				<p>이 문서는 2015년 5월 11일에 최종 번역되었습니다. 한국어판에 대한 제안/문의는 <a href="#">Github 저장소</a>에 이슈로 남겨주세요.</p>
+
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="introduction">
-				<h2>Introduction</h2>
-				<p>PHP is a complex language that has suffered years of twists, bends, stretches, and hacks. It's highly inconsistent and sometimes buggy. Each version has its own unique features, warts, and quirks, and it's hard to keep track of what version has what problems. It's easy to see why it gets as much hate as it does sometimes.</p>
-				<p>Despite that, it's the most popular language on the web today. Because of its long history, you'll find lots of tutorials on how to do basic things like password hashing and database access. The problem is that out of five tutorials, you have a good chance of finding five totally different ways of doing something. Which way is the "right" way? Do any of the other ways have subtle bugs or gotchas? It's really hard to find out, and you'll be bouncing around the internet trying to pin down the right answer.</p>
-				<p>That's also one of the reasons why new PHP programmers are so frequently blamed for ugly, outdated, or insecure code. They can't help it if the first Google result was a four-year-old article teaching a five-year-old method!</p>
-				<p>This document tries to address that. It's an attempt to compile a set of basic instructions for what can be considered best practices for common and confusing issues and tasks in PHP. If a low-level task has multiple and confusing approaches in PHP, it belongs here.</p>
-				<h3>What this is</h3>
-				<p>It's a guide suggesting the best direction to take when facing one of the common <em>low-level</em> tasks a PHP programmer might encounter that are unclear because of the many options PHP might offer. For example: connecting to a database is a common task with a large amount of possible solutions in PHP, not all of them good ones&mdash;thus, it's included in this document.</p>
-				<p>It's a series of short, introductory solutions. Examples should get you up and running in a basic setting, and you should do your own research to flesh them out into something useful to you.</p>
-				<p>It points to what we consider the state-of-the-art of PHP. However, this means that if you're using an older version of PHP, some of the features required to pull off these solutions might not be available to you.</p>
-				<p>This is a living document that I'll do my best to keep updated as PHP continues to evolve.</p>
-				<h3>What this <em>isn't</em></h3>
-				<p>This document is not a PHP tutorial. You should learn the basics and syntax of the language elsewhere.</p>
-				<p>It's not a guide to common web application problems like cookie storage, caching, coding style, documentation, and so on.</p>
-				<p>It's not a security guide. While it touches upon some security-related issues, you're expected to do your own research when it comes to securing your PHP apps. In particular, you should carefully review any solution proposed here before implementing it. Your code is your own fault.</p>
-				<p>It's not an advocate of a certain coding style, pattern, or framework.</p>
-				<p>It's not an advocate for a certain way of doing high-level tasks like user registration, login systems, etc. This document is strictly for <em>low-level</em> tasks that, because of PHP's long history, might be confusing or unclear.</p>
-				<p>It's not a be-all and end-all solution, nor is it the <em>only</em> solution. Some of the methods described below might not be what's best for your particular situation, and there are lots of different ways of achieving the same ends. In particular, high-load web apps might benefit from more esoteric solutions to some of these problems.</p>
-				<p class="back"><a href="#">Back to top</a></p>
+				<h2>소개</h2>
+				<p>PHP는 수년간 비틀리고, 휘어지고, 늘려지고, 난도질 당해온 복잡한 언어입니다. PHP는 매우 일관성이 없고 가끔 결함도 있습니다. 각 버전마다 각각의 독특한 기능과 결점, 특성을 가지고 있어서, 어떤 버전에 어떤 문제가 있는지 계속 확인해나가는 것은 쉽지 않습니다. 종종 그렇듯이 왜 PHP가 그렇게 미움을 받는지 아는 것은 간단합니다.</p>
+				<p>그럼에도 불구하고, PHP는 오늘날 웹에서 가장 인기있는 언어입니다. PHP의 긴 역사로 인해서 비밀번호 해싱(hashing)이나 데이터베이스 사용과 같은 기본적인 것을 어떻게 하는지에 관한 많은 자습서(tutorials)를 찾을 수 있습니다. 문제는 5개의 문서를 본다면 무언가를 하기위한 완전히 다른 다섯가지 방법을 발견하게 될 가능성이 높다는 것입니다. 어떤 방법이 "옳은" 방법일까요? 다른 방법들은 잠재적인 버그나 문제(gotchas)가 있는 건가요? 이런 것을 알아내기는 정말 어렵습니다. 여러분은 정답을 알아내기 위해서 인터넷을 찾아볼겁니다.</p>
+				<p>이것은 새로운 PHP 프로그래머들이 보기 흉하고, 구식이며, 안전하지 않은 코드때문에 매우 자주 비난당하는 한가지 이유가 됩니다. 하지만 첫번째 구글 검색 결과가 5년된 방법을 가르치는 4년된 문서라면 그들도 어쩔 수 없습니다.</p>
+				<p>이 문서는 이런 문제를 해결하고자 합니다. PHP에서 일반적이고 복잡한 문제와 작업을 위한 모범 사례(best practices)로 꼽을 수 있는 기본적인 설명들을 한데 모아보고자 합니다. 저 수준의 작업이 PHP에서 다양하고 복잡한 해결방법들이 있다면, 여기에 해당합니다.</p>
+				<h3>이 문서가 포함하는 것</h3>
+				<p>이 문서는 PHP 프로그래머가 직면할만한 일반적인 <em>저 수준</em>의 작업이지만, PHP가 많은 선택권을 제공하기 때문에 불명확한 작업을 만났을때 택해야할 가장 바람직한 방법을 제안하는 안내서입니다. 예를 들자면, 데이터베이스 연결하기는 PHP에서 많은 방법이 가능한 일반적인 작업이지만, 그것들 전부가 좋은 방법은 아닙니다. 따라서, 이것은 이 문서에 포함됩니다.</p>
+				<p>이 문서는 잛게 소개된 해결 방법들을 담고 있습니다. 예제는 여러분을 기본적인 설정을 알려주겠지만, 여러분은 나름대로 관련 자료를 찾아서 유용한 것들로 살을 붙여야 합니다.</p>
+				<p>이 문서는 최신 PHP를 사용하는 것을 가정합니다. 그래서 여러분이 오래된 버전의 PHP를 사용한다면 이러한 해결 방법들에서 사용하는 어떤 기능들을 사용하지 못할지도 모릅니다.</p>
+				<p>이 문서는 살아있는 문서로 PHP가 발전하는 것에 맞춰서 이 문서도 계속 수정하도록 최선을 다할 예정입니다.</p>
+				<h3>이 문서가 <em>포함하지 않는 것</em></h3>
+				<p>이 문서는 PHP 자습서가 아닙니다. PHP의 기본적인 내용과 문법 등은 다른 곳에서 배우셔야 합니다.</p>
+				<p>이 문서는 쿠키 저장이나 캐쉬(caching), 코딩 스타일, 문서화 등과 같은 일반적인 웹 애플리케이션 문제를 위한 안내서가 아닙니다.</p>
+				<p>이 문서는 보안 안내서가 아닙니다. 보안 관련 문제를 조금 다루고 있긴 하지만, 여러분의 PHP 애플리케이션을 안전하게 만들기 위해서는 별도로 관련자료를 찾아보셔야 합니다. 특히, 여기에서 제안한 방법을 구현하기 전에 신중하게 검토하십시오. 여러분의 코드는 여러분 자신의 책임입니다.</p>
+				<p>이 문서는 특정 코딩 스타일이나 패턴, 프레임워크를 주장하지 않습니다.</p>
+				<p>이 문서는 사용자 등록, 로그인 시스템 등과 같은 고 수준 작업을 하기 위한 특정 방법을 옹호하지 않습니다. 이 문서는 철처히 PHP의 긴 역사로 인해서 해결 방법이 복잡하고 불명확할 수 있는 <em>저 수준</em> 작업</p>을 위한 문서입니다.</p>
+				<p>이 문서에 소개된 방법이 가장 중요하거나 <em>단 하나의</em> 방법인 것은 아닙니다. 소개된 어떤 방법들은 여러분의 상황에서는 최선이 아닐 수도 있고, 동일한 결과를 얻기위한 다른 많은 방법이 있습니다. 특히 로드가 심한(high-load) 웹 애플리케이션들은 이런 문제에 대한 더 난해한 해결 방법이 도움이 될 수도 있습니다.</p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="version">
-				<h2>What PHP version are we using?</h2>
+				<h2>어떤 PHP 버전을 사용하나요?</h2>
 				<h3>PHP 5.5.9-1ubuntu4.2, installed on Ubuntu 14.04 LTS.</h3>
 				<p>PHP is the 100-year-old tortoise of the web world. Its shell is inscribed with a rich, convoluted, and gnarled history. In a shared-hosting environment, its configuration might restrict what you can do.</p>
 				<p>In order to retain a scrap of sanity, we're going to focus on just one version of PHP. As of April 30, 2013, that version is <strong>PHP 5.5.9-1ubuntu4.2</strong>. This is the version of PHP you'll get if you install it using apt-get on an <strong>Ubuntu 14.04 LTS</strong> server. In other words, it's the sane default used by many.</p>
@@ -106,10 +109,10 @@
 					<p>A lot has changed in the PHP world in the years between Ubuntu 12.04 and 14.04. Since 12.04 is still very common in the wild, and since some of the solutions below have changed significantly in 14.04, I'll include 12.04-specific solutions in a box like this one.</p>
 					<p>The version of PHP installed using apt-get on Ubuntu 12.04 is <b>PHP 5.3.10-1ubuntu3.6 with Suhosin-Patch</b>.</p>
 				</aside>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="passwords">
-				<h2>Storing passwords</h2>
+				<h2>비밀번호 저장하기</h2>
 				<h3>Use the built-in <a href="http://www.php.net/manual/en/book.password.php">password hashing</a> functions to hash and compare passwords.</h3>
 				<p>Hashing is the standard way of protecting a user's password before it's stored in a database. Many common hashing algorithms like md5 and even sha1 are unsafe for storing passwords, because <a href="http://arstechnica.com/security/2013/05/how-crackers-make-minced-meat-out-of-your-passwords/">hackers can easily crack passwords hashed using those algorithms</a>.</p>
 				<p>PHP provides a built-in password hashing library that uses the bcrypt algorithm, currently considered the best algorithm for password hashing.</p>
@@ -168,7 +171,7 @@
 						<li>Just like <code>password_hash()</code> in new versions of PHP, phpass automatically salts your password for you.</li>
 					</ul>
 				</aside>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="mysql">
 				<h2>Connecting to and querying a MySQL database</h2>
@@ -234,7 +237,7 @@
 					<li><a href="http://stackoverflow.com/questions/134099/are-pdo-prepared-statements-sufficient-to-prevent-sql-injection">Stack Overflow: Are PDO prepared statements sufficient to prevent SQL injection?</a></li>
 					<li><a href="https://stackoverflow.com/questions/1650591/whether-to-use-set-names">Stack Overflow: Whether to use "SET NAMES"</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="php-tags">
 				<h2>PHP tags</h2>
@@ -251,7 +254,7 @@
 				<ul>
 					<li><a href="http://stackoverflow.com/questions/200640/are-php-short-tags-acceptable-to-use">Stack Overflow: Are PHP short tags acceptable to use?</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="auto-loading">
 				<h2>Auto-loading classes</h2>
@@ -279,7 +282,7 @@
 					<li><a href="http://php.net/manual/en/function.spl-autoload-register.php">PHP Manual: spl_autoload_register()</a></li>
 					<li><a href="http://stackoverflow.com/questions/791899/efficient-php-auto-loading-and-naming-strategies">Stack Overflow: Efficient PHP auto-loading and naming strategies</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="quotes">
 				<h2>Single vs. double quotes from a performance perspective</h2>
@@ -292,7 +295,7 @@
 					<li><a href="http://phpbench.com/">The PHP Benchmark</a> (Scroll down to Quote Types)</li>
 					<li><a href="http://stackoverflow.com/questions/482202/is-there-a-performance-benefit-single-quote-vs-double-quote-in-php">Stack Overflow: Is there a performance benefit to single quotes vs double quotes in PHP?</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="constants">
 				<h2><code>define()</code> vs. <code>const</code></h2>
@@ -342,7 +345,7 @@
 					<li><a href="http://www.php.net/manual/en/language.constants.syntax.php">PHP Manual: Constants</a></li>
 					<li><a href="http://stackoverflow.com/questions/1225082/define-vs-variable-in-php">Stack Overflow: define() vs variable</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="opcode-cache">
 				<h2>Caching PHP opcode</h2>
@@ -371,7 +374,7 @@
 						<li><a href="http://php.net/manual/en/book.apc.php">PHP Manual: APC</a></li>
 					</ul>
 				</aside>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="memcached">
 				<h2>PHP and Memcached</h2>
@@ -425,7 +428,7 @@
 						<li><a href="http://php.net/manual/en/book.apc.php">PHP Manual: APC</a></li>
 					</ul>
 				</aside>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="regex">
 				<h2>PHP and regex</h2>
@@ -437,7 +440,7 @@
 					<li><a href="http://php.net/manual/en/book.pcre.php">PHP Manual: PCRE</a></li>
 					<li><a href="http://www.noupe.com/php/php-regular-expressions.html">Getting started with PHP regular expressions</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="serving-php">
 				<h2>Serving PHP from a web server</h2>
@@ -486,7 +489,7 @@
 					<p>The default site in Apache 2.2.22 is located at /etc/apache2/sites-available/default.</p>
 					<p>Apache 2.2.22 doesn't have a stable event MPM, so install apache2-mpm-worker instead of apache2-mpm-event.</p>
 				</aside>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="email">
 				<h2>Sending email</h2>
@@ -530,7 +533,7 @@
 				<ul>
 					<li><a href="https://github.com/PHPMailer/PHPMailer">PHPMailer at Github</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="validating-emails">
 				<h2>Validating email addresses</h2>
@@ -547,7 +550,7 @@
 					<li><a href="http://php.net/manual/en/function.filter-var.php">PHP Manual: filter_var()</a></li>
 					<li><a href="http://php.net/manual/en/filter.filters.php">PHP Manual: Types of filters</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="sanitizing-html">
 				<h2>Sanitizing HTML input and output</h2>
@@ -603,7 +606,7 @@
 					<li><a href="http://stackoverflow.com/questions/129677/whats-the-best-method-for-sanitizing-user-input-with-php">Stack Overflow: What's the best method for sanitizing user input with PHP?</a></li>
 					<li><a href="http://stackoverflow.com/questions/3150413/filter-sanitize-special-chars-problem-with-line-breaks">Stack Overflow: FILTER_SANITIZE_SPECIAL_CHARS problem with line breaks</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="utf-8">
 				<h2>PHP and UTF-8</h2>
@@ -687,7 +690,7 @@
 						<li><a href="http://stackoverflow.com/questions/140728/best-practices-in-php-and-mysql-with-international-strings">Stack Overflow: Best practices in PHP and MySQL with international strings</a></li>
 						<li><a href="http://mathiasbynens.be/notes/mysql-utf8mb4">How to support full Unicode in MySQL databases</a></li>
 					</ul>
-					<p class="back"><a href="#">Back to top</a></p>
+					<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="working-with-dates-and-times">
 				<h2>Working with dates and times</h2>
@@ -748,7 +751,7 @@
 						<p><a href="http://stackoverflow.com/questions/5319710/accessing-dates-in-php-beyond-2038">Stack Overflow: Accessing dates beyond 2038</a></p>
 					</li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="checking-for-null">
 				<h2>Checking if a value is null or false</h2>
@@ -791,13 +794,13 @@
 					<li><a href="http://php.net/manual/en/language.operators.comparison.php">PHP Manual: Comparison operators</a></li>
 					<li><a href="http://stackoverflow.com/questions/8228837/is-nullx-vs-x-null-in-php">Stack Overflow: is_null() vs ===</a></li>
 				</ul>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="suggestions">
 				<h2>Suggestions and corrections</h2>
 				<p>Thanks for reading! If you haven't figured it out already, PHP is complex and filled with pitfalls. Since I'm only human, there might be mistakes in this document.</p>
-				<p>If you'd like to contribute to this document with suggestions or corrections, please contact me using the information in the <a href="#maintainers">last revised &amp; maintainers</a> section.</p>
-				<p class="back"><a href="#">Back to top</a></p>
+				<p>If you'd like to contribute to this document with suggestions or corrections, please contact me using the information in the <a href="#maintainers">최신 개정판 &amp; 작성자</a> section.</p>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 		</article>
 	</main>
