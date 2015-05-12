@@ -86,7 +86,7 @@
 				<p>이 문서는 이런 문제를 해결하고자 합니다. PHP에서 일반적이고 복잡한 문제와 작업을 위한 모범 사례(best practices)로 꼽을 수 있는 기본적인 설명들을 한데 모아보고자 합니다. 저 수준의 작업이 PHP에서 다양하고 복잡한 해결방법들이 있다면, 여기에 해당합니다.</p>
 				<h3>이 문서가 포함하는 것</h3>
 				<p>이 문서는 PHP 프로그래머가 직면할만한 일반적인 <em>저 수준</em>의 작업이지만, PHP가 많은 선택권을 제공하기 때문에 불명확한 작업을 만났을때 택해야할 가장 바람직한 방법을 제안하는 안내서입니다. 예를 들자면, 데이터베이스 연결하기는 PHP에서 많은 방법이 가능한 일반적인 작업이지만, 그것들 전부가 좋은 방법은 아닙니다. 따라서, 이것은 이 문서에 포함됩니다.</p>
-				<p>이 문서는 잛게 소개된 해결 방법들을 담고 있습니다. 예제는 여러분을 기본적인 설정을 알려주겠지만, 여러분은 나름대로 관련 자료를 찾아서 유용한 것들로 살을 붙여야 합니다.</p>
+				<p>이 문서는 해결 방법들을 짧게 소개하고 있습니다. 예제는 여러분을 기본적인 설정을 알려주겠지만, 여러분은 나름대로 관련 자료를 찾아서 유용한 것들로 살을 붙여야 합니다.</p>
 				<p>이 문서는 최신 PHP를 사용하는 것을 가정합니다. 그래서 여러분이 오래된 버전의 PHP를 사용한다면 이러한 해결 방법들에서 사용하는 어떤 기능들을 사용하지 못할지도 모릅니다.</p>
 				<p>이 문서는 살아있는 문서로 PHP가 발전하는 것에 맞춰서 이 문서도 계속 수정하도록 최선을 다할 예정입니다.</p>
 				<h3>이 문서가 <em>포함하지 않는 것</em></h3>
@@ -94,56 +94,56 @@
 				<p>이 문서는 쿠키 저장이나 캐쉬(caching), 코딩 스타일, 문서화 등과 같은 일반적인 웹 애플리케이션 문제를 위한 안내서가 아닙니다.</p>
 				<p>이 문서는 보안 안내서가 아닙니다. 보안 관련 문제를 조금 다루고 있긴 하지만, 여러분의 PHP 애플리케이션을 안전하게 만들기 위해서는 별도로 관련자료를 찾아보셔야 합니다. 특히, 여기에서 제안한 방법을 구현하기 전에 신중하게 검토하십시오. 여러분의 코드는 여러분 자신의 책임입니다.</p>
 				<p>이 문서는 특정 코딩 스타일이나 패턴, 프레임워크를 주장하지 않습니다.</p>
-				<p>이 문서는 사용자 등록, 로그인 시스템 등과 같은 고 수준 작업을 하기 위한 특정 방법을 옹호하지 않습니다. 이 문서는 철처히 PHP의 긴 역사로 인해서 해결 방법이 복잡하고 불명확할 수 있는 <em>저 수준</em> 작업</p>을 위한 문서입니다.</p>
+				<p>이 문서는 사용자 등록, 로그인 시스템 등과 같은 고 수준 작업을 하기 위한 특정 방법을 옹호하지 않습니다. 이 문서는 철처히 PHP의 긴 역사로 인해서 해결 방법이 복잡하고 불명확할 수 있는 <em>저 수준</em> 작업을 위한 문서입니다.</p>
 				<p>이 문서에 소개된 방법이 가장 중요하거나 <em>단 하나의</em> 방법인 것은 아닙니다. 소개된 어떤 방법들은 여러분의 상황에서는 최선이 아닐 수도 있고, 동일한 결과를 얻기위한 다른 많은 방법이 있습니다. 특히 로드가 심한(high-load) 웹 애플리케이션들은 이런 문제에 대한 더 난해한 해결 방법이 도움이 될 수도 있습니다.</p>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="version">
 				<h2>어떤 PHP 버전을 사용하나요?</h2>
-				<h3>PHP 5.5.9-1ubuntu4.2, installed on Ubuntu 14.04 LTS.</h3>
-				<p>PHP is the 100-year-old tortoise of the web world. Its shell is inscribed with a rich, convoluted, and gnarled history. In a shared-hosting environment, its configuration might restrict what you can do.</p>
-				<p>In order to retain a scrap of sanity, we're going to focus on just one version of PHP. As of April 30, 2013, that version is <strong>PHP 5.5.9-1ubuntu4.2</strong>. This is the version of PHP you'll get if you install it using apt-get on an <strong>Ubuntu 14.04 LTS</strong> server. In other words, it's the sane default used by many.</p>
-				<p>You might find that some of these solutions work on different or older versions of PHP. If that's the case, <em>it's up to you to research the implications of subtle bugs or security issues in these older versions</em>.</p>
+				<h3>Ubuntu 14.04 LTS에 설치된 PHP 5.5.9-1ubuntu4.2</h3>
+				<p>PHP는 웹 세계의 100살 먹은 거북이입니다. 이 거북이의 등껍질에는 풍성하고, 복잡하며, 굴곡진 역사가 새겨져있습니다. 호스팅 환경에서는 여러분이 할 수 있는 것에 제약이 있을 수도 있습니다.</p>
+				<p>온전함을 유지하기 위해서 하나의 PHP 버전에 집중할 것입니다. 2013년 4월 30일 기준으로 <strong>PHP 5.5.9-1ubuntu4.2</strong>가 그렇습니다. 이것은 <strong>Ubuntu 14.04 LTS</strong> 서버에서 apt-get을 사용할때 설치되는 버전입니다. 다시 말하면, 많은 사람들이 사용하는 온전한 초기값입니다.</p>
+				<p>여기에 소개하는 어떤 해결방법은 다른 버전이나 오래된 버전의 PHP에서 잘 동작하는 것을 발견할지도 모릅니다. 그런 경우, <em>오래된 버전에 숨어있는 버그나 보안 문제들을 확인하는 것은 여러분의 몫입니다.</em></p>
 				<aside>
-					<h3>A note on Ubuntu 12.04 LTS</h3>
-					<p>A lot has changed in the PHP world in the years between Ubuntu 12.04 and 14.04. Since 12.04 is still very common in the wild, and since some of the solutions below have changed significantly in 14.04, I'll include 12.04-specific solutions in a box like this one.</p>
-					<p>The version of PHP installed using apt-get on Ubuntu 12.04 is <b>PHP 5.3.10-1ubuntu3.6 with Suhosin-Patch</b>.</p>
+					<h3>Ubuntu 12.04 LTS를 위한 안내</h3>
+					<p>Ubuntu 12.04와 Ubuntu 14.04 사이에 PHP 세계에서는 많은 변화가 있었습니다. 12.04를 여전히 흔하게 사용하고 있고, 아래의 몇몇 방법들은 14.04에서 큰 변화가 있기때문에, 이와 같은 박스안에 12.04를 위한 방법을 소개하겠습니다.</p>
+					<p>Ubuntu 12.04에서 apt-get으로 설치되는 PHP 버전은 <b>PHP 5.3.10-1ubuntu3.6 with Suhosin-Patch</b>입니다.</p>
 				</aside>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="passwords">
 				<h2>비밀번호 저장하기</h2>
-				<h3>Use the built-in <a href="http://www.php.net/manual/en/book.password.php">password hashing</a> functions to hash and compare passwords.</h3>
-				<p>Hashing is the standard way of protecting a user's password before it's stored in a database. Many common hashing algorithms like md5 and even sha1 are unsafe for storing passwords, because <a href="http://arstechnica.com/security/2013/05/how-crackers-make-minced-meat-out-of-your-passwords/">hackers can easily crack passwords hashed using those algorithms</a>.</p>
-				<p>PHP provides a built-in password hashing library that uses the bcrypt algorithm, currently considered the best algorithm for password hashing.</p>
-				<h4>Example</h4>
+				<h3>비밀번호를 해시하고 비교할때 내장(built-in) <a href="http://php.net/book.password">비밀번호 해싱</a> 함수를 사용하세요.</h3>
+				<p>해싱은 데이터베이스에 저장하기 전에 사용자의 비밀번호를 보호하는 관례적인 방법입니다. md5나 심지어 sha1과 같은 많은 일반적인 해싱 알고리즘은 <a href="http://arstechnica.com/security/2013/05/how-crackers-make-minced-meat-out-of-your-passwords/">해커들이 쉽게 비밀번호를 알아낼 수 있기 때문에</a> 비밀번호를 저장하기에는 안전하지 않습니다.</p>
+				<p>PHP는 현재 비밀번호 해싱을 위한 최고의 알고리즘으로 여기는 bcript 알고리즘을 사용하는 내장(built-in) 비밀번호 해싱 라이브러리를 제공합니다.</p>
+				<h4>예제</h4>
 				<code class="php">
 					&lt;?php
-					// Hash the password.  $hashedPassword will be a 60-character string.
+					// 비밀번호를 해시합니다.  $hashedPassword 는 60자 문자열이 됩니다.
 					$hashedPassword = password_hash('my super cool password', PASSWORD_DEFAULT);
 
-					// You can now safely store the contents of $hashedPassword in your database!
+					// 이제 $hashedPassword 내용을 안전하게 데이터베이스에 저장할 수 있습니다.
 
-					// Check if a user has provided the correct password by comparing what they typed with our hash
+					// 사용자가 입력한 것과 해시를 비교하여 올바른 비밀번호를 입력했는지 확인합니다.
 					password_verify('the wrong password', $hashedPassword); // false
 
 					password_verify('my super cool password', $hashedPassword); // true
 					?&gt;</code>
-				<h4>Gotchas</h4>
+				<h4>참고</h4>
 				<ul>
-					<li>Many sources will recommend that you also "salt" your password before hashing it. That's a great idea, and <code>password_hash()</code> <em>already salts your password for you</em>. That means that you don't have to salt it yourself.</li>
+					<li>많은 사람들이 비밀번호를 해싱하기 전에 salt값을 추가하라고(소금을 치라고) 권장할 것입니다. 그것은 좋은 생각인데, <code>password_hash()</code>는 이미 salt값을 추가해줍니다. 여러분이 직접 salt값을 추가할 필요가 없다는 말입니다.</li>
 				</ul>
-				<h4>Further reading</h4>
+				<h4>더 읽을거리</h4>
 				<ul>
 					<li><a href="http://blogs.msdn.com/b/lixiong/archive/2011/12/25/md5-sha1-salt-and-bcrypt.aspx">Why hashing passwords with md5 or sha is unsafe</a></li>
 					<li><a href="http://codahale.com/how-to-safely-store-a-password/">How to safely store a password</a></li>
 				</ul>
 				<aside>
 					<h3>Ubuntu 12.04 (PHP &lt;= 5.3.10)</h3>
-					<h3>Use the <a href="http://www.openwall.com/phpass/">phpass</a> library to hash and compare passwords.</h3>
-					<p><em>Tested with <a href="http://www.openwall.com/phpass/">phpass</a> 0.3.</em></p>
-					<p>The built-in PHP password hashing library isn't available in the version of PHP installed in 12.04. Instead, use the open-source <a href="http://www.openwall.com/phpass/">phpass</a> library, which provides the same bcrypt-based functionality in an easy-to-use class.</p>
-					<h4>Example</h4>
+					<h3>비밀번호를 해싱하고 비교할때 <a href="http://www.openwall.com/phpass/">phpass</a> 라이브러리를 사용하세요.</h3>
+					<p><em><a href="http://www.openwall.com/phpass/">phpass</a> 0.3</em>에서 테스트했습니다.</p>
+					<p>12.04에 설치된 PHP 버전에서는 내장 PHP 비밀번호 해싱 라이브러리를 사용할 수 없습니다. 대신, 사용이 쉽고 동일한 bcrypt 기반의 기능을 제공하는 오픈소스 <a href="http://www.openwall.com/phpass/">phpass</a> 라이브러리를 사용하세요.</p>
+					<h4>예제</h4>
 					<code class="php">
 						&lt;?php
 						// Include the phpass library
@@ -162,13 +162,13 @@
 
 						$hasher->CheckPassword('my super cool password', $hashedPassword); // true
 						?&gt;</code>
-					<h4>Further reading</h4>
+					<h4>더 읽을거리</h4>
 					<ul>
 						<li><a href="http://www.openwall.com/phpass/">phpass</a></li>
 					</ul>
-					<h4>Gotchas</h4>
+					<h4>참고</h4>
 					<ul>
-						<li>Just like <code>password_hash()</code> in new versions of PHP, phpass automatically salts your password for you.</li>
+						<li>PHP 새 버전의 <code>password_hash()</code>과 똑같이 phpass도 비밀번호에 salt값을 추가해줍니다.</li>
 					</ul>
 				</aside>
 				<p class="back"><a href="#">위로 이동</a></p>
