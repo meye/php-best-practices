@@ -174,11 +174,11 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="mysql">
-				<h2>Connecting to and querying a MySQL database</h2>
-				<h3>Use <a href="http://php.net/manual/en/book.pdo.php">PDO</a> and its prepared statement functionality.</h3>
-				<p>There are many ways to connect to a MySQL database in PHP. <a href="http://php.net/manual/en/book.pdo.php">PDO</a> (PHP Data Objects) is the newest and most robust of them. PDO has a consistent interface across many different types of database, uses an object-oriented approach, and supports more features offered by newer databases.</p>
-				<p>You should use PDO's prepared statement functions to help prevent SQL injection attacks. Using the <code><a href="http://php.net/manual/en/pdostatement.bindvalue.php">bindValue()</a></code> function ensures that your SQL is safe from first-order SQL injection attacks. (This isn't 100% foolproof though, see <a href="#pdo-further-reading">Further Reading</a> for more details.) In the past, this had to be achieved with some arcane combination of "magic quote" functions. PDO makes all that gunk unnecessary.</p>
-				<h4>Example</h4>
+				<h2>MySQL 데이터베이스에 연결하고 쿼리하기</h2>
+				<h3><a href="http://php.net/book.pdo">PDO</a>와 Prepared Statement 기능을 사용하세요.</h3>
+                <p>PHP로 MySQL 데이터베이스에 연결하는 방법은 많습니다. <a href="http://php.net/manual/en/book.pdo.php">PDO</a> (PHP Data Objects)는 최신이면서 강력한 방법입니다. PDO는 여러 종류의 데이터베이스에 객체지향 접근법을 사용하여 일관된 인터페이스를 가지며, 새로나온 데이터베이스들의 더 많은 기능도 지원합니다.</p>
+                <p>SQL 인젝션 공격을 방지하기 위해서 PDO의 Prepared Statement 기능을 사용해야합니다. <code><a href="http://php.net/pdostatement.bindvalue">bindValue()</a></code> 함수를 사용하여 여러분의 SQL이 일차적인 SQL 인젝션 공격에서 안전하도록 하세요. (이것이 100% 안전한 것을 보장하지는 않습니다. 이에 관해서는 <a href="#pdo-further-reading">더 읽을거리</a>를 참고하세요.) 과거에는 "magic quote" 함수들을 조합하여 위험을 방지해야했지만, PDO가 그 모든 지저분한 일을 할 필요없게 했습니다.</p>
+				<h4>예제</h4>
 				<code class="php">
 					&lt;?php
 					try{
@@ -221,17 +221,17 @@
 						print($ex->getMessage());
 					}
 					?&gt;</code>
-				<h4>Gotchas</h4>
+				<h4>참고</h4>
 				<ul>
-					<li>Not passing the <code>PDO::PARAM_INT</code> parameter when binding integer variables can sometimes cause PDO to quote them. This can screw up certain MySQL queries. See <a href="https://bugs.php.net/bug.php?id=44639">this bug report</a>.</li>
-					<li>Not having set the character set to utf8mb4 in the connection string might cause Unicode data to be stored incorrectly in your database, depending on your configuration.</li>
-					<li>Even if you declare your character set to be utf8mb4, make sure that your actual database tables are in the utf8mb4 character set. For why we use utf8mb4 instead of just utf8, check the <a href="#utf-8">PHP and UTF-8</a> section.</li>
-					<li>Enabling persistent connections can possibly lead to weird concurrency-related issues. This isn't a PHP problem, it's an app-level problem. Persistent connections are safe to use as long as you consider the consequences. See <a href="http://stackoverflow.com/questions/3332074/what-are-the-disadvantages-of-using-persistent-connection-in-pdo">this Stack Overflow question</a>.</li>
-					<li>You can execute more than one SQL statement in a single <code>execute()</code> call. Just separate the statements with semicolons. <b>Ubuntu 12.04 (PHP &lt;= 5.3.10):</b> If doing this, beware of <a href="https://bugs.php.net/bug.php?id=61207">this bug</a>, which isn't fixed in the version of PHP shipped with Ubuntu 12.04.</li>
+                    <li>정수형 변수를 바인딩할때 <code>PDO::PARAM_INT</code> 매개변수를 전달하지 않으면 PDO가 종종 따옴표를 추가합니다. 이것은 특정한 MySQL 쿼리를 엉망으로 만들 수 있습니다. <a href="https://bugs.php.net/bug.php?id=44639">이 버그 리포트</a>를 참고하세요.</li>
+                    <li>연결 문자열에 캐릭터 셋을 utf8mb4로 지정하지 않으면, 설정에 따라서 데이터베이스에 유니코드 데이터가 잘못 저장될 수 있습니다.</li>
+                    <li>캐릭터 셋을 utf8mb4로 선언했더라도, 실제 데이터베이스 테이블이 utf8mb4 캐릭터 셋으로 되어있는지 확인해야합니다. utf8이 아니라 utf8mb4를 사용하는 이유에 대해서는 <a href="#utf-8">PHP와 UTF-8</a> 항목을 참고하세요.</li>
+                    <li>Persistent 연결을 활성화하면 이상한 동시성 문제가 발생할 수 있습니다. 이것은 PHP 문제가 아니고, 애플리케이션 단의 문제입니다. Persistent 연결은 결과를 잘 알고 사용해야 안전합니다. <a href="http://stackoverflow.com/questions/3332074/what-are-the-disadvantages-of-using-persistent-connection-in-pdo">이 스택오버플로우 질문</a>을 참고하세요.</li>
+                    <li>하나의 <code>execute()</code> 호출에 한개 이상의 SQL문을 실행할 수 있습니다. 그저 세미콜론으로 문장 사이를 구분해주세요. <b>Ubuntu 12.04 (PHP &lt;= 5.3.10)</b>에서는 이렇게 할 경우 <a href="https://bugs.php.net/bug.php?id=61207">이 버그</a>를 조심하세요. Ubuntu 12.04에 제공되는 PHP에서는 고쳐지지 않았습니다.</li>
 				</ul>
-				<h4 id="pdo-further-reading">Further reading</h4>
+				<h4 id="pdo-further-reading">더 읽을거리</h4>
 				<ul>
-					<li><a href="http://php.net/manual/en/book.pdo.php">PHP Manual: PDO</a></li>
+					<li><a href="http://php.net/book.pdo">PHP Manual: PDO</a></li>
 					<li><a href="http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/">Why you should be using PHP's PDO for database access</a></li>
 					<li><a href="http://stackoverflow.com/questions/1402017/php-pdo-vs-normal-mysql-connect">Stack Overflow: PHP PDO vs normal mysql_connect</a></li>
 					<li><a href="http://stackoverflow.com/questions/134099/are-pdo-prepared-statements-sufficient-to-prevent-sql-injection">Stack Overflow: Are PDO prepared statements sufficient to prevent SQL injection?</a></li>
