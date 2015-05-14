@@ -48,22 +48,22 @@
 				<li><a href="#introduction">소개</a></li>
 				<li><a href="#version">어떤 PHP 버전을 사용하나요?</a></li>
 				<li><a href="#passwords">비밀번호 저장하기</a></li>
-				<li><a href="#mysql">PHP and MySQL</a></li>
-				<li><a href="#php-tags">PHP tags</a></li>
+				<li><a href="#mysql">PHP와 MySQL</a></li>
+				<li><a href="#php-tags">PHP 태그</a></li>
 				<li><a href="#auto-loading">Auto-loading classes</a></li>
-				<li><a href="#quotes">Single vs. double quotes</a></li>
-				<li><a href="#constants">define() vs. const</a></li>
-				<li><a href="#opcode-cache">Caching PHP opcode</a></li>
-				<li><a href="#memcached">PHP and Memcached</a></li>
-				<li><a href="#regex">PHP and regex</a></li>
+				<li><a href="#quotes">작은 따옴표와 큰 따옴표</a></li>
+				<li><a href="#constants">define() 과 const</a></li>
+				<li><a href="#opcode-cache">PHP opcode 캐시</a></li>
+				<li><a href="#memcached">PHP와 Memcached</a></li>
+				<li><a href="#regex">PHP와 정규표현식</a></li>
 				<li><a href="#serving-php">Serving PHP</a></li>
-				<li><a href="#email">Sending email</a></li>
-				<li><a href="#validating-emails">Validating email addresses</a></li>
+				<li><a href="#email">이메일 보내기</a></li>
+				<li><a href="#validating-emails">이메일 주소 검사하기</a></li>
 				<li><a href="#sanitizing-html">Sanitizing HTML</a></li>
-				<li><a href="#utf-8">PHP and UTF-8</a></li>
-				<li><a href="#working-with-dates-and-times">Working with dates and times</a></li>
-				<li><a href="#checking-for-null">Checking null and false values</a></li>
-				<li><a href="#suggestions">Suggestions and corrections</a></li>
+				<li><a href="#utf-8">PHP와 UTF-8</a></li>
+				<li><a href="#working-with-dates-and-times">날짜와 시간을 다루기</a></li>
+				<li><a href="#checking-for-null">null과 false 값 확인하기</a></li>
+				<li><a href="#suggestions">제안과 수정사항</a></li>
 			</ol>
 		</nav>
 		<article>
@@ -240,17 +240,18 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="php-tags">
-				<h2>PHP tags</h2>
-				<h3>Use &lt;?php ?&gt;.</h3>
-				<p>There are a few different ways to delimit blocks of PHP: <code>&lt;?php ?&gt;</code>, <code>&lt;?= ?&gt;</code>, <code>&lt;? ?&gt;</code>, and <code>&lt;% %&gt;</code>. While the shorter ones might be more convenient to type, the only one that's guaranteed to work on all PHP servers is <code>&lt;?php ?&gt;</code>. If you ever plan on deploying your PHP to a server whose configuration you can't control, then you should always use <code>&lt;?php ?&gt;</code>.</p>
-				<p>If you're only coding for yourself and have control over the PHP configuration you'll be using, you might find the shorter tags to be more convenient. But remember that <code>&lt;? ?&gt;</code> might conflict with XML declarations and <code>&lt;% %&gt;</code> is actually ASP style.</p>
+				<h2>PHP 태그</h2>
+				<h3>&lt;?php ?&gt;를 사용하세요.</h3>
+				<p>PHP 구역을 정하는 방법은 다음과 같은 몇가지 방법이 있습니다. <code>&lt;?php ?&gt;</code>, <code>&lt;?= ?&gt;</code>, <code>&lt;? ?&gt;</code>, <code>&lt;% %&gt;</code>. 짧은 것이 입력하기에는 더 편리하겠지만, 모든 PHP 서버에서 동작하는 것을 보장하는 것은 <code>&lt;?php ?&gt;</code> 뿐입니다. PHP 코드를 여러분이 통제할 수 없는 서버에 배포할 계획이라면, 반드시 <code>&lt;?php ?&gt;</code>를 사용하세요.</p>
+				<p>여러분을 위해서 코딩하면서 사용하는 PHP 설정을 통제할 수 있다면, 짧은 태그가 편리할 수 있습니다. 하지만 <code>&lt;? ?&gt;</code>는 XML 선언과 겹치고, <code>&lt;% %&gt;</code>는 사실 ASP 스타일입니다.</p>
 				<p>Whatever you choose, make sure you stay consistent!</p>
-				<h4>Gotchas</h4>
+				<p>무엇을 선택하든지, 한가지로 일관되게 사용하세요!</p>
+				<h4>참고</h4>
 				<ul>
-					<li>When including a closing <code>?&gt;</code> tag in a pure PHP file (for example, in a file that only contains a class definition), <em>make sure not to leave any trailing newlines after it</em>. While the PHP parser safely "eats" a single newline character after the closing tag, any other newlines might be outputted to the browser and possibly confuse things if you're outputting any HTTP headers later.</li>
-					<li>When writing a web app targeting older versions of IE, make sure not to leave a newline between any closing <code>?&gt;</code> tag and the html <code>&lt;!doctype&gt;</code> tag. Old versions of IE will enter <a href="http://www.quirksmode.org/css/quirksmode.html">quirks mode</a> if they encounter any white space, including newlines, before the doctype declaration. This isn't an issue for newer versions of IE and other, more advanced browsers. (Read: every other browser besides IE.)</li>
+					<li>순수한 PHP 파일(클래스 정의만 담은 파일 등)에서 <code>?&gt;</code> 태그와 같은 닫는 태그를 사용할때, <em>태그 뒤에 빈줄이 들어가지 않도록 하세요.</em>. PHP 파서가 닫는 태그 뒤의 하나의 줄바꿈 문자를 안전하게 "먹어버리지만", 남은 줄바꿈 문자들은 브라우저에 출력될 수 있고, HTTP 헤더를 나중에 출력할 경우에 문제가 될 수 있습니다.</li>
+					<li>옛 버전의 IE를 대상으로 한다면, <code>?&gt;</code> 태그와 HTML <code>&lt;!doctype&gt;</code> 태그 사이에 빈 줄이 들어가지 않도록 해야합니다. doctype 선언 전에 줄바꿈과 같은 공백이 나오면, 옛 버전의 IE는 <a href="http://www.quirksmode.org/css/quirksmode.html">쿼크 모드</a>로 동작합니다. 최근 버전의 IE와 다른 브라우저에서는 문제가 되지 않습니다.</li>
 				</ul>
-				<h4>Further reading</h4>
+				<h4>더 읽을거리</h4>
 				<ul>
 					<li><a href="http://stackoverflow.com/questions/200640/are-php-short-tags-acceptable-to-use">Stack Overflow: Are PHP short tags acceptable to use?</a></li>
 				</ul>
