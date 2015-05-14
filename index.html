@@ -50,7 +50,7 @@
 				<li><a href="#passwords">비밀번호 저장하기</a></li>
 				<li><a href="#mysql">PHP와 MySQL</a></li>
 				<li><a href="#php-tags">PHP 태그</a></li>
-				<li><a href="#auto-loading">Auto-loading classes</a></li>
+				<li><a href="#auto-loading">클래스 오토로딩(Auto-loading)</a></li>
 				<li><a href="#quotes">작은 따옴표와 큰 따옴표</a></li>
 				<li><a href="#constants">define() 과 const</a></li>
 				<li><a href="#opcode-cache">PHP opcode 캐시</a></li>
@@ -258,11 +258,11 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="auto-loading">
-				<h2>Auto-loading classes</h2>
-				<h3>Use <code><a href="http://php.net/manual/en/function.spl-autoload-register.php">spl_autoload_register()</a></code> to register your auto-load function.</h3>
-				<p>PHP provides several ways to auto-load files containing classes that haven't yet been loaded. The older way is to use a magic global function called <code><a href="http://php.net/manual/en/function.autoload.php">__autoload()</a></code>. However you can only have one <code>__autoload()</code> function defined at once, so if you're including a library that <em>also</em> uses the <code>__autoload()</code> function, then you'll have a conflict.</p>
-				<p>The correct way to handle this is to name your autoload function something unique, then register it with the <code><a href="http://php.net/manual/en/function.spl-autoload-register.php">spl_autoload_register()</a></code> function. This function allows more than one <code>__autoload()</code> function to be defined, so you won't step on any other code's own <code>__autoload()</code> function.</p>
-				<h4>Example</h4>
+				<h2>클래스 오토로딩(Auto-loading)</h2>
+				<h3><code><a href="http://php.net/function.spl-autoload-register">spl_autoload_register()</a></code>를 사용해서 오토로딩 함수(auto-load function)를 등록하세요.</h3>
+				<p>PHP는 아직 읽어오지 않은 클래스를 포한한 파일을 자동으로 불러오는 몇가지 방법을 제공합니다. 오래된 방법은 매직 전역 함수(magic global function)인 <code><a href="http://php.net/function.autoload">__autoload()</a></code>를 사용하는 것입니다. 하지만 한번에 하나의  <code>__autoload()</code> 함수만을 정의할 수 있어서 <code>__autoload()</code> 함수를 사용하는 라이브러리를 포함시키면, 충돌을 일으키게 됩니다.</p>
+				<p>이런 문제를 해결하는 올바른 방법은 오토로딩 함수를 뭔가 고유한 이름으로 만들고, 이것을 <code><a href="http://php.net/function.spl-autoload-register">spl_autoload_register()</a></code> 함수를 사용하여 등록하는 것입니다. 이 함수는 하나 이상의 <code>__autoload()</code> 함수를 정의하는 것을 허용하기 때문에, 다른 코드의 <code>__autoload()</code> 함수에 문제를 일으킬 우려가 없습니다.</p>
+				<h4>예제</h4>
 				<code class="php">
 					&lt;?php
 					// First, define your auto-load function.
@@ -278,7 +278,7 @@
 					// For this example, assume the MyClass class is defined in the MyClass.php file.
 					$var = new MyClass();
 					?&gt;</code>
-				<h4>Further reading</h4>
+				<h4>더 읽을거리</h4>
 				<ul>
 					<li><a href="http://php.net/manual/en/function.spl-autoload-register.php">PHP Manual: spl_autoload_register()</a></li>
 					<li><a href="http://stackoverflow.com/questions/791899/efficient-php-auto-loading-and-naming-strategies">Stack Overflow: Efficient PHP auto-loading and naming strategies</a></li>
