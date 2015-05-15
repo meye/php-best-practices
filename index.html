@@ -278,13 +278,13 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="quotes">
-				<h2>Single vs. double quotes from a performance perspective</h2>
-				<h3>It doesn't really matter.</h3>
-				<p>A lot of ink has been spilled about whether to define strings with single quotes (') or double quotes ("). Single-quoted strings aren't parsed, so whatever you've put in the string, that's what will show up. Double-quoted strings are parsed and any PHP variables in the string are evaluated. Additionally, escaped characters like \n for newline and \t for tab <i>are not</i> evaluated in single-quoted strings, but <i>are</i> evaluated in double-quoted strings.</p>
-				<p>Because double-quoted strings are evaluated at run time, the theory is that using single-quoted strings will improve performance because PHP won't have to evaluate every single string. While this might be true on a certain scale, for the average real-life application the difference is so small that it doesn't really matter. So for an average app, it doesn't matter what you choose. For <em>extremely</em> high-load apps, it might matter a little. Make a choice depending on what your app needs, but whatever you choose, be consistent.</p>
-				<h4>Further reading</h4>
+				<h2>성능 관점에서의 작은 따옴표와 큰 따옴표</h2>
+				<h3>사실 별 상관없습니다.</h3>
+				<p>문자열을 정의할때 작은 따옴표(')를 사용할지, 큰 따옴표(")를 사용할지에 대해 많은 잉크가 쓰였습니다. 작은 따옴표로 묶인 문자열은 해석되지 않아서 문자열에 적힌 그대로 표시됩니다. 큰 따옴표로 묶인 문자열은 해석되어 문자열 내에 있는 PHP 변수들은 모두 평가(evaluated)됩니다. 줄바꿈을 위한 \n이나 탭을 위한 \t와 같은 이스케이프 문자는 작은 따옴표로 묶인 문자열에서는 <i>평가되지 않지만</i>, 큰 따옴표로 묶인 문자열에서는 <i>평가됩니다</i>.</p>
+				<p>큰 따옴표로 묶인 문자열은 실행 시간에 평가되기 때문에, 이론적으로는 작은 따옴표로 묶인 문자열은 평가할 필요가 없어서 성능을 향상시킨다고 합니다. 어느 정도의 규모에서는 사실일지도 모르지만, 평범한 현실적인 애플리케이션에서의 차이는 아무 의미 없을 정도로 작습니다. 그래서 보통의 애플리케이션에서는 무엇을 사용하든지 상관없습니다. <em>극단적으로</em> 부하가 심한 애플리케이션에서는 영향이 약간 있을 수도 있습니다. 여러분의 애플리케이션의 필요에 맞게 선택하시고, 어떤 것을 선택하든지 일관되게 사용하세요.</p>
+				<h4>더 읽을거리</h4>
 				<ul>
-					<li><a href="http://php.net/manual/en/language.types.string.php">PHP Manual: Strings</a></li>
+					<li><a href="http://php.net/language.types.string">PHP Manual: Strings</a></li>
 					<li><a href="http://phpbench.com/">The PHP Benchmark</a> (Scroll down to Quote Types)</li>
 					<li><a href="http://stackoverflow.com/questions/482202/is-there-a-performance-benefit-single-quote-vs-double-quote-in-php">Stack Overflow: Is there a performance benefit to single quotes vs double quotes in PHP?</a></li>
 				</ul>
