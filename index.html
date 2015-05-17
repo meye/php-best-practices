@@ -369,22 +369,22 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="memcached">
-				<h2>PHP and Memcached</h2>
-				<h3>If you need a distributed cache, use the <a href="http://php.net/manual/en/book.memcached.php">Memcached</a> client library.  Otherwise, use <a href="http://pecl.php.net/package/APCu">APCu</a>.</h3>
-				<p>A caching system can often improve your app's performance. <a href="http://memcached.org/">Memcached</a> is a popular choice and it works with many languages, including PHP.</p>
-				<p>However, when it comes to accessing a Memcached server from a PHP script, you have two different and very stupidly named choices of client library: <a href="http://php.net/manual/en/book.memcache.php">Memcache</a> and <a href="http://php.net/manual/en/book.memcached.php">Memcached</a>. They're different libraries with almost the same name, and both are used to access a Memcached instance.</p>
-				<p>It turns out that the Memcache<u>d</u> library is the one that best implements the Memcached protocol. It includes a few useful features that the Memcache library doesn't, and seems to be the one most actively developed.</p>
-				<p>However if you don't need to access a Memcached instance from a series of distributed servers, then <a href="http://pecl.php.net/package/APCu">use APCu instead</a>. APCu is supported by the PHP project and has much of the same functionality as Memcached.</p>
-				<h4>Installing the Memached client library</h4>
-				<p>After you install the Memcached server, you need to install the Memcached client library. Without the library, your PHP scripts won't be able to communicate with the Memcached server.</p>
-				<p>You can install the Memcached client library on Ubuntu 14.04 by running this command in your terminal:</p>
+				<h2>PHP와 Memcached</h2>
+				<h3>분산형 캐시가 필요하다면, <a href="http://php.net/book.memcached">Memcached</a> 클라이언트 라이브러리를 사용하세요. 아니면, <a href="http://pecl.php.net/package/APCu">APCu</a>를 사용하세요.</h3>
+				<p>캐싱 시스템은 애플리케이션의 성능을 향상시킬 수 있습니다. <a href="http://memcached.org/">Memcached</a>는 PHP를 포함한 많은 언어에서 동작하는 인기있는 선택지입니다.</p>
+				<p>하지만, Memcached 서버를 PHP 스크립트에서 접근하려고 하면, 여러분에게는 아주 바보같은 이름의 두가지 클라이언트 중에 하나를 고를 수 있습니다. <a href="http://php.net/book.memcache">Memcache</a>와 <a href="http://php.net/book.memcached">Memcached</a>가 그것입니다. 둘은 거의 같은 이름을 가진 전혀 다른 라이브러리로 둘다 Memcached 인스턴스에 접근하는데 사용합니다.</p>
+				<p>Memcache<u>d</u> 라이브러리가 Memcached 프로토콜을 가장 잘 구현한 라이브러리로 알려졌습니다. Memcache 라이브러리에는 없는 몇가지 유용한 기능을 포함하고 있고, 가장 활발하게 개발되고 있는 것 같습니다.</p>
+				<p>하지만, 분산된 서버들에서 Memcached 인스턴스에 접근하는 것이 아니라면, <a href="http://pecl.php.net/package/APCu">대신 APCu를 사용하세요</a>. APCu는 PHP 프로젝트에 의해서 지원되고 Memcached와 거의 같은 기능을 제공합니다.</p>
+				<h4>Memached 클라이언트 라이브러리 설치하기</h4>
+				<p>Memcached 서버를 설치하고나면, Memcached 클라이언트 라이브러리를 설치해야합니다. 라이브러리없이는 PHP 스크립트가 Memcached 서버와 통신할 수 없습니다.</p>
+				<p>Ubuntu 14.04에서 다음 명령을 터미널에 실행하면 Memcached 클라이언트 라이브러리를 설치할 수 있습니다.</p>
 				<code class="terminal">sudo apt-get install php5-memcached</code>
-				<h4>Using APCu instead</h4>
-				<p>Before Ubuntu 14.04, the APC project was both an opcode cache <em>and</em> a Memcached-like key-value store. Since the version of PHP that ships with 14.04 <a href="#opcode-cache">now includes a built-in opcode cache</a>, APC was split into the APCu project, which is essentially APC's key-value storage functionality&mdash;AKA the "user cache", or the "u" in APCu&mdash;without the opcode-cache parts.</p>
-				<h4>Installing APCu</h4>
-				<p>You can install APCu on Ubuntu 14.04 by running this command in your terminal:</p>
+				<h4>APCu를 사용하기</h4>
+				<p>Ubuntu 14.04 이전에는 APC 프로젝트에 opcode 캐시와 Memcached와 비슷한 키-값 저장소 <em>둘 다</em> 있었습니다. 14.04에 포함된 PHP 버전부터는 <a href="#opcode-cache">내장 opcode 캐시를 포함하고</a>, APC는 opcode 캐시 기능을 제외한 ("user cahce"나 APCu의 "u"라고도 하는) APC의 키-값 저장소 기능만 APCu 프로젝트로 분리되었습니다.</p>
+				<h4>APCu 설치하기</h4>
+				<p>Ubuntu 14.04에서 다음 명령을 터미널에 실행하면 APCu를 설치할 수 있습니다.</p>
 				<code class="terminal">sudo apt-get install php5-apcu</code>
-				<h4>Example</h4>
+				<h4>예제</h4>
 				<code class="php">
 					&lt;?php
 					// Store some values in the APCu cache.  We can optionally pass a time-to-live, but in this example the values will live forever until they're garbage-collected by APCu.
@@ -403,21 +403,21 @@
 
 					apc_delete('username-958'); // This key will no longer be available.
 					?&gt;</code>
-				<h4>Further reading</h4>
+				<h4>더 읽을거리</h4>
 				<ul>
-					<li><a href="http://php.net/manual/en/book.memcached.php">PHP Manual: Memcached</a></li>
+					<li><a href="http://php.net/book.memcached">PHP: Memcached - Manual</a></li>
 					<li><a href="http://pecl.php.net/package/APCu">PECL: APCu</a></li>
 					<li><a href="http://stackoverflow.com/questions/1442411/using-memcache-vs-memcached-with-php">Stack Overflow: Using Memcache vs Memcached with PHP</a></li>
 					<li><a href="http://stackoverflow.com/questions/815041/memcached-vs-apc-which-one-should-i-choose">Stack Overflow: Memcached vs APC, which one should I choose?</a></li>
 				</ul>
 				<aside>
 					<h3>Ubuntu 12.04 (PHP &lt;= 5.3.10)</h3>
-					<h3>Using <a href="http://php.net/manual/en/book.apc.php">APC</a> instead of Memcached</h3>
-					<p>If you're using APC as both a key-value store and an opcode cache in Ubuntu 12.04, then the example above will also work&mdash;APC and APCu have an identical API.</p>
-					<p>See the <a href="#opcode-cache">section on opcode caching</a> for instructions on how to install APC on Ubuntu 12.04.</p>
-					<h4>Further reading</h4>
+					<h3>Memcached 대신에 <a href="http://php.net/book.apc">APC</a>를 사용하세요.</h3>
+					<p>Ubuntu 12.04에서 키-값 저장소와 opcode 캐시로 APC를 사용한다면, (APC와 APCu는 API가 동일하기때문에) 위의 예제도 잘 동작합니다.</p>
+					<p>Ubuntu 12.04에 APC를 설치하는 방법에 대해서는 <a href="#opcode-cache">opcode 캐시 부분</a>을 참고하세요.</p>
+					<h4>더 읽을거리</h4>
 					<ul>
-						<li><a href="http://php.net/manual/en/book.apc.php">PHP Manual: APC</a></li>
+						<li><a href="http://php.net/book.apc">PHP: APC - Manual</a></li>
 					</ul>
 				</aside>
 				<p class="back"><a href="#">위로 이동</a></p>
