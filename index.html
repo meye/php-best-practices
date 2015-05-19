@@ -528,19 +528,19 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="validating-emails">
-				<h2>Validating email addresses</h2>
-				<h3>Use the <code><a href="http://php.net/manual/en/function.filter-var.php">filter_var()</a></code> function.</h3>
-				<p>A common task your web app might need to do is to check if a user has entered a valid email address. You'll no doubt find online a dizzying range of complex regular expressions that all claim to solve this problem, but the easiest way is to use PHP's built-in <code><a href="http://php.net/manual/en/function.filter-var.php">filter_var()</a></code> function, which can validate email addresses.</p>
-				<h4>Example</h4>
+				<h2>이메일 주소 검사하기</h2>
+				<h3><code><a href="http://php.net/manual/en/function.filter-var.php">filter_var()</a></code> 함수를 사용하세요.</h3>
+				<p>사용자가 이메일 주소를 올바르게 입력했는지 확인하는 것은 웹 애플리케이션에서 흔하게 해야하는 작업일 것입니다. 여러분은 의심할 나위없이 이 문제를 해결한다고 주장하는 현기증 나는 길이의 복잡한 정규 표현식들을 찾게되겠지만, 가장 쉬운 방법은 PHP의 내장되어 이메일 주소를 검사하는 <code><a href="http://php.net/function.filter-var">filter_var()</a></code> 함수를 사용하는 것입니다.</p>
+				<h4>예제</h4>
 				<code class="php">
 					&lt;?php
 					filter_var('sgamgee@example.com', FILTER_VALIDATE_EMAIL); // Returns "sgamgee@example.com". This is a valid email address.
 					filter_var('sauron@mordor', FILTER_VALIDATE_EMAIL); // Returns boolean false! This is *not* a valid email address.
 					?&gt;</code>
-				<h4>Further reading</h4>
+				<h4>더 읽을거리</h4>
 				<ul>
-					<li><a href="http://php.net/manual/en/function.filter-var.php">PHP Manual: filter_var()</a></li>
-					<li><a href="http://php.net/manual/en/filter.filters.php">PHP Manual: Types of filters</a></li>
+					<li><a href="http://php.net/function.filter-var">PHP: filter_var() - Manual</a></li>
+					<li><a href="http://php.net/filter.filters">PHP: Types of filters - Manual</a></li>
 				</ul>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
