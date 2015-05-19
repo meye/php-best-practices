@@ -48,7 +48,7 @@
 				<li><a href="#opcode-cache">PHP opcode 캐시</a></li>
 				<li><a href="#memcached">PHP와 Memcached</a></li>
 				<li><a href="#regex">PHP와 정규표현식</a></li>
-				<li><a href="#serving-php">Serving PHP</a></li>
+				<li><a href="#serving-php">서버에 PHP 올리기</a></li>
 				<li><a href="#email">이메일 보내기</a></li>
 				<li><a href="#validating-emails">이메일 주소 검사하기</a></li>
 				<li><a href="#sanitizing-html">Sanitizing HTML</a></li>
@@ -435,21 +435,21 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="serving-php">
-				<h2>Serving PHP from a web server</h2>
-				<h3>Use <a href="http://php.net/manual/en/install.fpm.php">PHP-FPM</a>.</h3>
-				<p>There are several ways of configuring a web server to serve PHP. The traditional (and terrible) way is to use Apache's <a href="http://stackoverflow.com/questions/2712825/what-is-mod-php">mod_php</a>. Mod_php attaches PHP to Apache itself, but Apache does a very bad job of managing it. You'll suffer from severe memory problems as soon as you get any kind of real traffic.</p>
-				<p>Two new options soon became popular: <a href="http://www.fastcgi.com/mod_fastcgi/docs/mod_fastcgi.html">mod_fastcgi</a> and <a href="http://httpd.apache.org/mod_fcgid/">mod_fcgid</a>. Both of these keep a limited number of PHP processes running, and Apache sends requests to these interfaces to handle PHP execution on its behalf. Because these libraries limit how many PHP processes are alive, memory usage is greatly reduced without affecting performance.</p>
-				<p>Some smart people created an implementation of fastcgi that was specially designed to work really well with PHP, and they called it <a href="http://php.net/manual/en/install.fpm.php">PHP-FPM</a>. This was the standard solution for web servers since 12.04.</p>
-				<p>In the years since Ubuntu 12.04, Apache introduced a new method of interacting with PHP-FPM: <a href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html">mod_proxy_fcgi</a>. Unfortunately, the version of Apache that ships with Ubuntu 14.04 has a few problems with this module, including not being able to use socket-based connections, issues with mod_rewrite, and issues with 404 and similar pages. Because of these problems you should stick with the tried-and-true method of working with PHP-FPM that we used in Ubuntu 12.04.</p>
-				<p>The following example is for Apache 2.4.7, but PHP-FPM also works for other web servers like Nginx.</p>
-				<h4>Installing PHP-FPM and Apache</h4>
-				<p>You can install PHP-FPM and Apache on Ubuntu 14.04 by running these command in your terminal:</p>
+				<h2>웹서버에 PHP 올리기</h2>
+				<h3><a href="http://php.net/install.fpm">PHP-FPM</a>를 사용하세요.</h3>
+                <p>PHP를 사용하기 위해서 웹서버를 설정하는 여러가지 방법이 있습니다. 전통적(이고 끔찍한) 방법은 Apache의 <a href="http://stackoverflow.com/questions/2712825/what-is-mod-php">mod_php</a>를 사용하는 것입니다. Mod_php는 PHP를 Apache 자체에 연결해주지만, Apache는 제대로 관리하지 못합니다. 실제 트래픽을 감당하게 되자마자 심각한 메모리 문제를 격게 될 겁니다.</p>
+				<p>다음 두 가지 새로운 선택이 빠르게 인기를 얻었습니다. 그것은 <a href="http://www.fastcgi.com/mod_fastcgi/docs/mod_fastcgi.html">mod_fastcgi</a>와 <a href="http://httpd.apache.org/mod_fcgid/">mod_fcgid</a>입니다. 두 가지 모두 제한된 수의 PHP 프로세스를 실행하고, Apache가 요청을 이 인터페이스에 보내서, 이것들이 PHP 실행을 관리하도록 합니다. 이 라이브러리들이 실행할 PHP 프로세스 수를 제한하기 때문에 성능에 영향을 미치지 않으면서 메모리 사용량을 크게 줄일 수 있습니다.</p>
+                <p>어느 똑똑한 사람들이 특별히 PHP와 아주 잘 동작하도록 설계된 fastcgi의 구현을 만들었는데, 그 이름은 <a href="http://php.net/manual/en/install.fpm.php">PHP-FPM</a>입니다. 12.04 이후로 이것이 웹서버를 위한 표준 솔루션입니다.</p>
+                <p>Ubuntu 12.04 출시 몇 년 후에, Apache는 PHP-FPM와 연동할 새로운 방법을 내놓았는데, 바로 <a href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html">mod_proxy_fcgi</a>입니다. 안타깝지만 Ubuntu 14.04에 포함된 Apache 버전에는 이 모듈에 약간 문제가 있습니다. 소켓 기반의 연결을 사용할 수 없고, mod_rewrite관련 이슈와, 404와 같은 페이지에 문제(issues with 404 and similar pages)가 있습니다. 따라서, Ubuntu 12.04에서 사용했던 검증된 PHP-FPM 사용법을 사용하세요.</p>
+                <p>아래 예제는 Apache 2.4.7을 위한 것이지만, PHP-FPM는 Nginx와 같은 다른 웹서버들과도 동작합니다.</p>
+				<h4>PHP-FPM과 Apache 설치하기</h4>
+                <p>아래 명령어를 터미널에서 실행하여 Ubuntu 14.04에 PHP-FPM과 Apache를 설치할 수 있습니다.</p>
 				<code class="terminal multiline">
 						<span>sudo apt-get install apache2-mpm-event libapache2-mod-fastcgi php5-fpm</span>
 						<span>sudo a2enmod actions alias fastcgi</span>
 					</code>
-				<p>Note that we <em>must</em> use apache2-mpm-event (or apache2-mpm-worker), <em>not</em> apache2-mpm-prefork or apache2-mpm-threaded.</p>
-				<p>Next, we'll configure our Apache virtualhost to route PHP requests to the PHP-FPM process. Place the following in your Apache configuration file (in Ubuntu 14.04 the default one is /etc/apache2/sites-available/000-default.conf).</p>
+                <p><em>반드시</em> apache2-mpm-event (혹은 apache2-mpm-worker)를 사용하고, apache2-mpm-prefork나 apache2-mpm-threaded를 사용해서는 <em>안된다</em>는 것에 주의하세요.</p>
+                <p>다음으로는, PHP 요청을 PHP-FPM으로 라우팅할 Apache 가상호스트를 설정합니다. 아래 내용을 Apache 설정파일에 넣으세요. (Ubuntu 14.04의 기본 설정 위치는 /etc/apache2/sites-available/000-default.conf).</p>
 				<code class="php">
 					&lt;Directory /&gt;
 						Require all granted
@@ -462,24 +462,24 @@
 							SetHandler	php5-fcgi
 						&lt;/FilesMatch&gt;
 					&lt;/VirtualHost&gt;</code>
-				<p>Finally, restart Apache and the FPM process:</p>
+				<p>마지막으로, Apache와 FPM 프로세스를 재시작합니다.</p>
 				<code class="terminal">sudo service apache2 restart && sudo service php5-fpm restart</code>
-				<h4>Gotchas</h4>
+				<h4>참고</h4>
 				<ul>
-					<li>Using the <code><a href="http://httpd.apache.org/docs/2.4/mod/mod_mime.html#addhandler">AddHandler</a></code> directive instead of the <code><a href="http://httpd.apache.org/docs/2.4/mod/core.html#sethandler">SetHandler</a></code> directive can be a security risk. <code>AddHandler</code> will execute PHP in files that have ".php" <em>anywhere in the file name</em>. So if a user uploads evil.php.gif using your file upload form, you might be in for a nasty surprise.</li>
+                    <li><code><a href="http://httpd.apache.org/docs/2.4/mod/core.html#sethandler">SetHandler</a></code> 디렉티브(directive) 대신에 <code><a href="http://httpd.apache.org/docs/2.4/mod/mod_mime.html#addhandler">AddHandler</a></code> 디렉티브를 사용하는 것은 보안 위험이 있습니다. <code>AddHandler</code>는 ".php"를 <em>파일 이름 중 어디에든 포함한</em> 파일 안의 PHP 코드를 실행할 것 입니다. 그래서 사용자가 파일 업로드 폼(form)을 사용해서 evil.php.gif 파일을 업로드 하면, 예기치못한 불쾌한 일을 당할지도 모릅니다.</li>
 				</ul>
-				<h4>Further reading</h4>
+				<h4>더 읽을거리</h4>
 				<ul>
-					<li><a href="http://php.net/manual/en/install.fpm.php">PHP Manual: PHP-FPM</a></li>
+					<li><a href="http://php.net/install.fpm">PHP: PHP-FPM - Manual</a></li>
 					<li><a href="http://php-fpm.org">PHP-FPM homepage</a></li>
 					<li><a href="https://alexcabal.com/installing-apache-mod_fastcgi-php-fpm-on-ubuntu-server-maverick/">Installing Apache + mod_fastcgi + PHP-FPM on Ubuntu Server Maverick</a></li>
 					<li><a href="http://www.joomlaperformance.com/articles/webcasts/why_mod_php_is_bad_for_performance_52_58.html">Why mod_php is bad for performance</a></li>
 				</ul>
 				<aside>
 					<h3>Ubuntu 12.04 (Apache 2.2.22)</h3>
-					<p>The configuration for Ubuntu 12.04 is just as above, except don't include the <code>&lt;Directory&gt;</code> block in the configuration file.</p>
-					<p>The default site in Apache 2.2.22 is located at /etc/apache2/sites-available/default.</p>
-					<p>Apache 2.2.22 doesn't have a stable event MPM, so install apache2-mpm-worker instead of apache2-mpm-event.</p>
+                    <p>Ubuntu 12.04를 위한 설정은, <code>&lt;Directory&gt;</code> 블록을 설정파일에 포함하지 않는 것만 제외하고 위와 같습니다.</p>
+                    <p>Apache 2.2.22 의 기본 사이트 설정은 /etc/apache2/sites-available/default 에 있습니다.</p>
+                    <p>Apache 2.2.22는 안정적인 event MPM이 없기 때문에, apache2-mpm-event 대신에 apache2-mpm-worker를 설치하세요.</p>
 				</aside>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
