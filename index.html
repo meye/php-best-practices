@@ -601,25 +601,25 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="utf-8">
-				<h2>PHP and UTF-8</h2>
+				<h2>PHP와 UTF-8</h2>
 				<h3>There's no one-liner.  Be careful, detailed, and consistent.</h3>
-				<p>UTF-8 in PHP sucks. Sorry.</p>
-				<p>Right now PHP does not support Unicode at a low level. There are ways to ensure that UTF-8 strings are processed OK, but it's not easy, and it requires digging in to almost all levels of the web app, from HTML to SQL to PHP. We'll aim for a brief, practical summary.</p>
-				<h4>UTF-8 at the PHP level</h4>
-				<p>The basic <a href="http://php.net/manual/en/language.operators.string.php">string operations</a>, like concatenating two strings and assigning strings to variables, don't need anything special for UTF-8. However most <a href="http://php.net/manual/en/ref.strings.php">string functions</a>, like <code><a href="http://php.net/manual/en/function.strpos.php">strpos()</a></code> and <code><a href="http://php.net/manual/en/function.strlen.php">strlen()</a></code>, <em>do</em> need special consideration. These functions often have an <code>mb_*</code> counterpart: for example, <code><a href="http://php.net/manual/en/function.mb-strpos.php">mb_strpos()</a></code> and <code><a href="http://php.net/manual/en/function.mb-strlen.php">mb_strlen()</a></code>. Together, these counterpart functions are called the <a href="http://php.net/manual/en/ref.mbstring.php">Multibyte String Functions</a>. The multibyte string functions are specifically designed to operate on Unicode strings.</p>
-				<p>You <em>must</em> use the <code>mb_*</code> functions whenever you operate on a Unicode string. For example, if you use <code><a href="http://php.net/manual/en/function.substr.php">substr()</a></code> on a UTF-8 string, there's a good chance the result will include some garbled half-characters. The correct function to use would be the multibyte counterpart, <code><a href="http://php.net/manual/en/function.mb-substr.php">mb_substr()</a></code>.</p>
-				<p>The hard part is remembering to use the <code>mb_*</code> functions <em>at all times</em>. If you forget even just once, your Unicode string has a chance of being garbled during further processing.</p>
-				<p>Not all string functions have an <code>mb_*</code> counterpart. If there isn't one for what you want to do, then you might be out of luck.</p>
-				<p>Additionally, you should use the <code><a href="http://php.net/manual/en/function.mb-internal-encoding.php">mb_internal_encoding()</a></code> function at the top of every PHP script you write (or at the top of your global include script), and the <code><a href="http://php.net/manual/en/function.mb-http-output.php">mb_http_output()</a></code> function right after it if your script is outputting to a browser. Explicitly defining the encoding of your strings in every script will save you a lot of headaches down the road.</p>
-				<p>Finally, many PHP functions that operate on strings have an optional parameter letting you specify the character encoding. You should always explicitly indicate UTF-8 when given the option. For example, <code><a href="http://php.net/manual/en/function.htmlentities.php">htmlentities()</a></code> has an option for character encoding, and you should <em>always</em> specify UTF-8 if dealing with such strings.</p>
-				<h4>UTF-8 at the MySQL level</h4>
-				<p>If your PHP script accesses MySQL, there's a chance your strings could be stored as non-UTF-8 strings in the database even if you follow all of the precautions above.</p>
-				<p>To make sure your strings go from PHP to MySQL as UTF-8, make sure your database and tables are all set to the utf8mb4 character set and collation, and that you use the utf8mb4 character set in the PDO connection string. For an example, see the section on <a href="#mysql">connecting to and querying a MySQL database</a>. This is <em>critically important</em>.</p>
-				<p>Note that you must use the utf8mb4 character set for complete UTF-8 support, <em>not</em> the utf8 character set! See <a href="#utf8-further-reading">Further Reading</a> for why.</p>
-				<h4>UTF-8 at the browser level</h4>
-				<p>Use the <code><a href="http://php.net/manual/en/function.mb-http-output.php">mb_http_output()</a></code> function to ensure that your PHP script outputs UTF-8 strings to your browser. In your HTML, include the <code><a href="http://htmlpurifier.org/docs/enduser-utf8.html">charset</a></code> meta tag in your page's <code>&lt;head&gt;</code> tag.
-					<h4>Example</h4>
-					<code class="php">
+				<p>미안하지만, PHP에서 UTF-8은 형편없습니다.</p>
+				<p>현재 PHP는 내부적으로<sup class="origin">low level</sup> 유니코드를 지원하지 않습니다. UTF-8 문자열을 제대로 처리하도록 강제하는 방법은 있지만, 쉽지 않고, HTML부터 SQL과 PHP까지 웹 애플리케이션의 거의 모든 부분을 파해쳐야 합니다. 간략하게 실용적인 내용을 정리해보겠습니다.</p>
+				<h4>PHP에서의 UTF-8</h4>
+				<p>두 문자열을 연결해서 변수에 문자열을 할당하는 것과 같은 기본 <a href="http://php.net/language.operators.string">문자열 연산</a>은 UTF-8을 위해서 아무 것도 필요없습니다. 하지만, <code><a href="http://php.net/function.strpos">strpos()</a></code>나 <code><a href="http://php.net/function.strlen">strlen()</a></code>과 같은 대부분의 <a href="http://php.net/ref.strings">문자열 함수</a>는 특별히 주의<em>해야 합니다</em>. 이런 함수들은 보통 <code>mb_*</code>로 시작하는 대응 함수가 있습니다. 예를 들자면, <code><a href="http://php.net/function.mb-strpos">mb_strpos()</a></code>나 <code><a href="http://php.net/function.mb-strlen">mb_strlen()</a></code>이 있습니다. 이렇게 대응하는 함수들을 묶어서 <a href="http://php.net/ref.mbstring">멀티바이트 문자열 함수</a><sup class="origin">Multibyte String Functions</sup>라고 부릅니다. 멀티 바이트 문자열 함수들은 유니코드 문자열에 동작하도록 만들어졌습니다.</p>
+				<p>유니코드 문자열을 다룰때에는 <em>반드시</em> <code>mb_*</code> 함수를 사용하세요. UTF-8 문자열에 <code><a href="http://php.net/function.substr">substr()</a></code>을 사용하면, 알아볼 수 없는 반쪽짜리 문자를 포함한 결과를 얻게될 가능성이 높습니다. 이럴때 사용해야할 함수는 대응하는 멀티바이트 문자열 함수인 <code><a href="http://php.net/function.mb-substr">mb_substr()</a></code>입니다.</p>
+				<p>어려운 점은, <em>항상</em> <code>mb_*</code> 함수를 사용해야 한다는 것을 기억해야한다는 것입니다. 단 한번이라도 잊게되면, 여러분의 유니코드 문자열은 처리과정에서 알아볼 수 없게 되어버릴 것입니다.</p>
+				<p>모든 문자열 함수에 <code>mb_*</code> 대응 함수가 있는 것은 아닙니다. 여러분이 하려는 것에 대응 함수가 없다면, 운이 없다고 생각하세요.</p>
+				<p>그리고, 작성하는 모든 PHP 스크립트 상단에 (또는, 전역으로 포함하는 스크립트의 상단에) <code><a href="http://php.net/function.mb-internal-encoding">mb_internal_encoding()</a></code> 함수를 사용하세요. 스크립트가 브라우저에 출력한다면, 바로 뒤에 <code><a href="http://php.net/function.mb-http-output">mb_http_output()</a></code> 함수를 사용하세요. 모든 스크립트에 문자열의 인코딩을 명시적으로 정의하는 것이 앞으로 있을 수 있는 많은 두통거리를 막아줍니다.</p>
+				<p>마지막으로, 문자열을 다루는 많은 PHP 함수들은 문자 인코딩을 지정할 수 있는 부가<sup class="origin">optional</sup> 매개변수가 있습니다. 가능할 경우, 항상 명시적으로 UTF-8을 지정하세요. 예를 들어 <code><a href="http://php.net/function.htmlentities">htmlentities()</a></code>는 문자 인코딩을 위한 옵션이 있는데, UTF-8 문자열을 다룰때에는 <em>항상</em> UTF-8을 명기하세요.</p>
+				<h4>MySQL에서의 UTF-8</h4>
+				<p>PHP 스크립트가 MySQL에 접속한다면, 위에서 다룬 모든 예방 조치를 하더라도 데이터베이스에 비 UTF-8 문자열로 저장될 가능성이 있습니다.</p>
+				<p>PHP에서 MySQL로 문자열을 확실하게 UTF-8로 전달하기 위해서, 데이터베이스와 테이블 모두 utf8mb4 문자셋<sup class="origin">character set</sup>과 collation으로 설정하고, PDO 연결 문자열<sup class="origin">PDO connection string</sup>에서도 utf8mb4 문자셋을 사용하세요. 예제는 <a href="#mysql">MySQL 데이터베이스에 연결하고 쿼리하기</a> 항목을 참고하세요. 이것은 <em>정말 중요합니다</em>.</p>
+				<p>완전한 UTF-8 지원을 위해서 utf8이 <em>아니라</em> utf8mb4 문자셋을 사용해야하는 것에 주의하세요! 그 이유는 <a href="#utf8-further-reading">더 읽을거리</a>를 참고하세요.</p>
+				<h4>브라우저에서의 UTF-8</h4>
+				<p>PHP 스크립트가 UTF-8 문자열을 브라우저에 출력하도록 <code><a href="http://php.net/function.mb-http-output">mb_http_output()</a></code> 함수를 사용하세요. HTML 페이지의 <code>&lt;head&gt;</code> 태그에 <code><a href="http://htmlpurifier.org/docs/enduser-utf8.html">charset</a></code> 메타 태그도 넣으세요.</p>
+				<h4>예제</h4>
+				<code class="php">
 					&lt;?php
 					// Tell PHP that we're using UTF-8 strings until the end of the script
 					mb_internal_encoding('UTF-8');
@@ -674,15 +674,15 @@
 							?&gt;
 						&lt;/body&gt;
 					&lt;/html&gt;</code>
-					<h4 id="utf8-further-reading">Further reading</h4>
-					<ul>
-						<li><a href="http://php.net/manual/en/ref.mbstring.php">PHP Manual: Multibyte String Functions</a></li>
-						<li><a href="http://blog.loftdigital.com/blog/php-utf-8-cheatsheet">PHP UTF-8 Cheatsheet</a></li>
-						<li><a href="http://stackoverflow.com/questions/571694/what-factors-make-php-unicode-incompatible">Stack Overflow: What factors make PHP Unicode-incompatible?</a></li>
-						<li><a href="http://stackoverflow.com/questions/140728/best-practices-in-php-and-mysql-with-international-strings">Stack Overflow: Best practices in PHP and MySQL with international strings</a></li>
-						<li><a href="http://mathiasbynens.be/notes/mysql-utf8mb4">How to support full Unicode in MySQL databases</a></li>
-					</ul>
-					<p class="back"><a href="#">위로 이동</a></p>
+				<h4 id="utf8-further-reading">더 읽을거리</h4>
+				<ul>
+					<li><a href="http://php.net/ref.mbstring">PHP: Multibyte String Functions - Manual</a></li>
+					<li><a href="http://blog.loftdigital.com/blog/php-utf-8-cheatsheet">PHP UTF-8 Cheatsheet</a></li>
+					<li><a href="http://stackoverflow.com/questions/571694/what-factors-make-php-unicode-incompatible">Stack Overflow: What factors make PHP Unicode-incompatible?</a></li>
+					<li><a href="http://stackoverflow.com/questions/140728/best-practices-in-php-and-mysql-with-international-strings">Stack Overflow: Best practices in PHP and MySQL with international strings</a></li>
+					<li><a href="http://mathiasbynens.be/notes/mysql-utf8mb4">How to support full Unicode in MySQL databases</a></li>
+				</ul>
+				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="working-with-dates-and-times">
 				<h2>Working with dates and times</h2>
