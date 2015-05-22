@@ -62,11 +62,11 @@
 			<h2>PHP Best Practices</h2>
 			<section id="maintainers">
 				<h2>최신 개정판 &amp; 관리자</h2>
-				<p>이 문서는 2014년 7월 3일에 최종 확인했습니다. 2014년 7월 3일에 최종 수정되었습니다.</p>
+				<p>이 문서는 2014년 7월 3일에 최종 검토했습니다. 2014년 7월 3일에 최종 수정되었습니다.</p>
 				<p>이 문서는 저, <a href="https://alexcabal.com" rel="author">Alex Cabal</a>이 관리하고 있습니다. 저는 오랜 기간 PHP를 작성해왔고, 현재 <a href="http://www.scribophile.com/">진지한 작가를 위한 온라인 글쓰기 그룹인 Scribophile</a>, <a href="http://writerfolio.com">프리랜서를 위한 쉬운 온라인 글쓰기 포트폴리오인 Writerfolio</a>, <a href="https://standardebooks.com">삽화가 들어간 DRM없는 퍼블릭 도메인 eBook을 출판하는 Standard Ebooks</a> 등을 운영하고 있습니다. 가끔 흥미를 갖게하는 프로젝트나 의뢰인들을 위해서 프리랜서로 일합니다.</p>
 				<p>제가 뭔가 도울일이 있거나 이 문서에 어떤 제안이나 정정할 것이 있다면 <a href="https://alexcabal.com/contact/">연락주세요.</a></p>
-				<h3>한국어판 안내</h3>
-				<p>이 문서는 2015년 5월 11일에 최종 번역되었습니다. 한국어판에 대한 제안/문의는 <a href="https://github.com/meye/php-best-practices/issues">Github 저장소</a>에 이슈로 남겨주세요.</p>
+				<h4>한국어판 안내</h4>
+				<p>이 문서는 2014년 7월 3일에 수정된 내용을 기반으로 2015년 5월 23일에 최종 번역되었습니다. 한국어판에 대한 제안/문의는 <a href="https://github.com/meye/php-best-practices/issues">Github 저장소</a>에 이슈로 남겨주세요.</p>
 
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
@@ -746,11 +746,11 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="checking-for-null">
-				<h2>Checking if a value is null or false</h2>
-				<h3>Use the <code><a href="http://php.net/manual/en/language.operators.comparison.php">===</a></code> operator to check for null and boolean false values.</h3>
-				<p>PHP's loose typing system offers many different ways of checking a variable's value. However it also presents a lot of problems. Using <code><a href="http://php.net/manual/en/language.operators.comparison.php">==</a></code> to check if a value is null or false can return false positives if the value is actually an empty string or 0. <code><a href="http://php.net/manual/en/function.isset.php">isset()</a></code> checks whether a variable has a value, <em>not</em> whether that value is null or false, so it's not appropriate to use here.</p>
-				<p>The <code><a href="http://php.net/manual/en/function.is-null.php">is_null()</a></code> function accurately checks if a value is null, and the <code><a href="http://php.net/manual/en/function.is-bool.php">is_bool()</a></code> function checks if it's a boolean value (like <code>false</code>), but there's an even better option: the <code><a href="http://php.net/manual/en/language.operators.comparison.php">===</a></code> operator. <code>===</code> checks if the values are <em>identical</em>, which is not the same as <em>equivalent</em> in PHP's loosely-typed world. It's also slightly faster than <code>is_null()</code> and <code>is_bool()</code>, and looks nicer than using a function for comparison.</p>
-				<h4>Example</h4>
+				<h2>값이 null인지 false인지 확인하기</h2>
+				<h3>null과 false 값을 확인할 때에는 <code><a href="http://php.net/language.operators.comparison">===</a></code> 연산자를 사용하세요.</h3>
+				<p>PHP의 느슨한 형식의 시스템<sup class="origin">loose typing system</sup>은 변수의 값을 확인하는 많은 방법을 제공합니다. 하지만 이는 많은 문제를 안고 있기도 합니다. <code><a href="http://php.net/language.operators.comparison">==</a></code> 연산자를 사용해서 값이 null인지 false인지 확인하는 것은 값이 빈 문자열이나 0일 경우에 참으로 잘못 판단<sup class="origin">false positives</sup>할 수 있습니다. <code><a href="http://php.net/function.isset">isset()</a></code>은 변수가 값을 가지고 있는지 확인하지만, 그 값이 null이나 false인지는 확인하지 <em>않기</em> 때문에 이런 경우에 사용하기에는 적당하지 않습니다.</p>
+				<p><code><a href="http://php.net/function.is-null">is_null()</a></code> 함수는 값이 null인지 확인하고, <code><a href="http://php.net/function.is-bool">is_bool()</a></code> 함수는 값이 (<code>false</code>와 같은) 부울 값인지 확인하지만, 더 나은 것이 있습니다. 바로 <code><a href="http://php.net/language.operators.comparison">===</a></code> 연산자입니다. <code>===</code> 연산자는 느슨한 형식의 PHP 환경에서 <em>동등한</em><sup class="origin">equivalent</sup> 것이 아니라 값이 <em>동일한지</em><sup class="origin">identical</sup> 확인합니다. 또한, <code>is_null()</code>이나 <code>is_bool()</code>보다 약간 빠르고, 비교를 위해서 함수를 사용하는 것보다 보기 좋습니다.</p>
+				<h4>예제</h4>
 				<code class="php">
 					&lt;?php
 					$x = 0;
@@ -777,21 +777,21 @@
 					if(strpos('abc', 'a') !== false)
 						print('Found it for real this time!');
 					?&gt;</code>
-				<h4>Gotchas</h4>
+				<h4>참고</h4>
 				<ul>
-					<li>When testing the return value of a function that can return either 0 or boolean <code>false</code>, like <code>strpos()</code>, always use <code>===</code> and <code>!==</code>, or you'll run in to problems.</li>
+					<li><code>strpos()</code>와 같이 0이나 <code>false</code>값을 리턴하는 함수의 리턴값을 확인할때에는, 항상 <code>===</code> 연산자와 <code>!==</code> 연산자를 사용하세요. 그렇지 않으면 문제가 발생합니다.</li>
 				</ul>
-				<h4>Further reading</h4>
+				<h4>더 읽을거리</h4>
 				<ul>
-					<li><a href="http://php.net/manual/en/language.operators.comparison.php">PHP Manual: Comparison operators</a></li>
+					<li><a href="http://php.net/language.operators.comparison">PHP: Comparison operators - Manual</a></li>
 					<li><a href="http://stackoverflow.com/questions/8228837/is-nullx-vs-x-null-in-php">Stack Overflow: is_null() vs ===</a></li>
 				</ul>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="suggestions">
 				<h2>제안이나 수정사항</h2>
-				<p>읽어주셔서 감사합니다! 여러분이 미리 알고있지 않는다면, PHP는 복잡하고 위험들로 가득 차있습니다. 저도 사람이기에 이 문서에 어떤 실수가 있을 수 있습니다.</p>
-				<p>이 문서에 어떤 제안이나 수정할 것이 있으면, <a href="#maintainers">최신 개정판 &amp; 관리자</a> 항목의 정보를 참고하시고 저에게 연락주세요.</p>
+				<p>읽어주셔서 감사합니다! 여러분이 미리 파악하고 있지 않는다면, PHP는 복잡하고 위험들로 가득 차있습니다. 저도 사람이기에 이 문서에는 어떤 실수가 있을 수 있습니다.</p>
+				<p>이 문서에 어떤 제안이나 수정할 것이 있으면, <a href="#maintainers">최신 개정판 &amp; 관리자</a> 항목의 정보를 참고하셔서 연락주세요.</p>
 				<p>한국어판 번역에 대한 제안이나 수정 사항은 <a href="https://github.com/meye/php-best-practices/issues">Github 저장소</a>에 이슈를 남겨주세요.</p>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
