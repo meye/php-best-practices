@@ -685,11 +685,11 @@
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="working-with-dates-and-times">
-				<h2>Working with dates and times</h2>
-				<h3>Use the <a href="http://php.net/manual/en/class.datetime.php"><code>DateTime</code> class</a>.</h3>
-				<p>In the bad old days of PHP we had to work with dates and times using a bewildering combination of <code><a href="http://php.net/manual/en/function.date.php">date()</a></code>, <code><a href="http://php.net/manual/en/function.gmdate.php">gmdate()</a></code>, <code><a href="http://php.net/manual/en/function.date-timezone-set.php">date_timezone_set()</a></code>, <code><a href="http://php.net/manual/en/function.strtotime.php">strtotime()</a></code>, and so on. Sadly you'll still find lots of tutorials online featuring these difficult and old-fashioned functions.</p>
-				<p>Fortunately for us, the version of PHP we're talking about features the much friendlier <a href="http://php.net/manual/en/class.datetime.php"><code>DateTime</code> class</a>. This class encapsulates all the functionality <em>and more</em> of the old date functions in one easy-to-use class, with the bonus of making time zone conversions much simpler. Always use the <code>DateTime</code> class for creating, comparing, changing, and displaying dates in PHP.</p>
-				<h4>Example</h4>
+				<h2>날짜와 시간 다루기</h2>
+				<h3><a href="http://php.net/class.datetime"><code>DateTime</code> 클래스</a>를 사용하세요.</h3>
+				<p>PHP의 옛 암흑기에는 <code><a href="http://php.net/function.date">date()</a></code>, <code><a href="http://php.net/function.gmdate">gmdate()</a></code>, <code><a href="http://php.net/function.date-timezone-set">date_timezone_set()</a></code>, <code><a href="http://php.net/function.strtotime">strtotime()</a></code> 등 갈피를 잡기 힘든 조합으로 날짜와 시간을 다룰 수 밖에 없었습니다. 슬프게도 여전히 많은 온라인 학습서들에 이런 어려운 옛 방식의 함수들을 소개하는 것을 볼 수 있습니다.</p>
+				<p>다행히도 우리가 이야기하고 있는 버전의 PHP에는 매우 친절한 <a href="http://php.net/class.datetime"><code>DateTime</code> 클래스</a>가 있습니다. 이 클래스는 옛 방식의 함수들의 모든 기능에 더해서 <em>더 많은 기능</em>을 하나의 사용하기 쉬운 클래스에 담고 있습니다. 덤으로 훨씬 간편하게 시간대 변환도 할 수 있습니다. PHP에서 날짜를 만들고, 비교하거나, 변경하고, 표시할 때에는 항상 <code>DateTime</code> 클래스를 사용하세요.</p>
+				<h4>예제</h4>
 				<code class="php">
 					&lt;?php
 					// Construct a new UTC date.  Always specify UTC unless you really know what you're doing!
@@ -719,25 +719,25 @@
 					echo('The 2nd date is ' . $difference['days'] . ' later than 1st date.');
 					?&gt;
 					</code>
-				<h4>Gotchas</h4>
+				<h4>참고</h4>
 				<ul>
 					<li>
-						<p>If you don't specify a time zone, <code><a href="http://php.net/manual/en/datetime.construct.php">DateTime::__construct()</a></code> will set the resulting date's time zone to <em>the time zone of the computer you're running on</em>. This can lead to spectacular headaches later on. <strong>Always specify the UTC time zone when creating new dates unless you really know what you're doing.</strong></p>
+						<p>시간대를 지정하지 않으면, <code><a href="http://php.net/datetime.construct">DateTime::__construct()</a></code>은 <em>동작 중인 컴퓨터의 시간대</em>로 시간대를 설정하여 날짜를 만듭니다. 이것은 나중에 굉장히 골치 아픈 일을 초래할 수 있습니다. <strong>잘 모르겠으면 새로운 날짜를 만들때 항상 UTC 시간대로 설정하세요.</strong></p>
 					</li>
 					<li>
-						<p>If you use a Unix timestamp in <code>DateTime::__construct()</code>, the time zone will always be set to UTC regardless of what you specify in the second argument.</p>
+						<p><code>DateTime::__construct()</code>에 유닉스 타임 스탬프<sup class="origin">timestamp</sup>를 사용하면, 두번째 매개변수에 어떤 값이 있든지 시간대는 항상 UTC 로 설정됩니다.</p>
 					</li>
 					<li>
-						<p>Passing zeroed dates (e.g. &quot;0000-00-00&quot;, a value commonly produced by MySQL as the default value in a DateTime column) to <code>DateTime::__construct()</code> will result in a nonsensical date, not &quot;0000-00-00&quot;.</p>
+						<p><code>DateTime::__construct()</code>에 0으로 된 날짜(예. &quot;0000-00-00&quot;, 보통 MySQL이 DateTime 컬럼의 기본 값으로 생성하는 값)를 넘기면, &quot;0000-00-00&quot;이 아니라 엉뚱한 날짜가 됩니다.</p>
 					</li>
 					<li>
-						<p>Using <code><a href="http://php.net/manual/en/datetime.gettimestamp.php">DateTime::getTimestamp()</a></code> on 32-bit systems will not represent dates past 2038. 64-bit systems are OK.</p>
+						<p>32비트 시스템에서 <code><a href="http://php.net/datetime.gettimestamp">DateTime::getTimestamp()</a></code>는 2038년 이후의 시간은 표시하지 못합니다. 64비트 시스템은 문제 없습니다.</p>
 					</li>
 				</ul>
-				<h4>Further Reading</h4>
+				<h4>더 읽을거리</h4>
 				<ul>
 					<li>
-						<p><a href="http://php.net/manual/en/book.datetime.php">PHP Manual: The DateTime class</a></p>
+						<p><a href="http://php.net/class.datetime">PHP: DateTime - Manual</a></p>
 					</li>
 					<li>
 						<p><a href="http://stackoverflow.com/questions/5319710/accessing-dates-in-php-beyond-2038">Stack Overflow: Accessing dates beyond 2038</a></p>
