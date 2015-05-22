@@ -73,21 +73,21 @@
 			<section id="introduction">
 				<h2>소개</h2>
 				<p>PHP는 수년간 비틀리고, 휘어지고, 늘려지고, 난도질 당해온 복잡한 언어입니다. PHP는 매우 일관성이 없고 가끔 결함도 있습니다. 각 버전마다 각각의 독특한 기능과 결점, 특성을 가지고 있어서, 어떤 버전에 어떤 문제가 있는지 계속 확인해나가는 것은 쉽지 않습니다. 종종 그렇듯이 왜 PHP가 그렇게 미움을 받는지 아는 것은 간단합니다.</p>
-				<p>그럼에도 불구하고, PHP는 오늘날 웹에서 가장 인기있는 언어입니다. PHP의 긴 역사로 인해서 비밀번호 해싱(hashing)이나 데이터베이스 사용과 같은 기본적인 것을 어떻게 하는지에 관한 많은 학습서(tutorials)를 찾을 수 있습니다. 문제는 5개의 문서를 본다면 무언가를 하기위한 완전히 다른 다섯가지 방법을 발견하게 될 가능성이 높다는 것입니다. 어떤 방법이 "옳은" 방법일까요? 다른 방법들은 잠재적인 버그나 문제(gotchas)가 있는 건가요? 이런 것을 알아내기는 정말 어렵습니다. 여러분은 정답을 알아내기 위해서 인터넷을 찾아볼겁니다.</p>
+				<p>그럼에도 불구하고, PHP는 오늘날 웹에서 가장 인기있는 언어입니다. PHP의 긴 역사로 인해서 비밀번호 해싱<sup class="origin">hashing</sup>이나 데이터베이스 사용과 같은 기본적인 것을 어떻게 하는지에 관한 많은 학습서<sup class="origin">tutorials</sup>를 찾을 수 있습니다. 문제는 5개의 문서를 본다면 무언가를 하기위한 완전히 다른 다섯가지 방법을 발견하게 될 가능성이 높다는 것입니다. 어떤 방법이 "옳은" 방법일까요? 다른 방법들은 잠재적인 버그나 문제<sup class="origin">gotchas</sup>가 있는 건가요? 이런 것을 알아내기는 정말 어렵습니다. 여러분은 정답을 알아내기 위해서 인터넷을 찾아볼겁니다.</p>
 				<p>이것은 새로운 PHP 프로그래머들이 보기 흉하고, 구식이며, 안전하지 않은 코드때문에 매우 자주 비난당하는 한가지 이유가 됩니다. 하지만 첫번째 구글 검색 결과가 5년된 방법을 가르치는 4년된 문서라면 그들도 어쩔 수 없습니다.</p>
-				<p>이 문서는 이런 문제를 해결하고자 합니다. PHP에서 일반적이고 복잡한 문제와 작업을 위한 모범 사례(best practices)로 꼽을 수 있는 기본적인 설명들을 한데 모아보고자 합니다. 저 수준의 작업이 PHP에서 다양하고 복잡한 해결방법들이 있다면, 여기에 해당합니다.</p>
+				<p>이 문서는 이런 문제를 해결하고자 합니다. PHP에서 일반적이고 복잡한 문제와 작업을 위한 모범 사례<sup class="origin">best practices</sup>로 꼽을 수 있는 기본적인 설명들을 한데 모아보고자 합니다. 저 수준의 작업이 PHP에서 다양하고 복잡한 해결방법들이 있다면, 여기에 해당합니다.</p>
 				<h3>이 문서가 포함하는 것</h3>
-				<p>이 문서는 PHP 프로그래머가 직면할만한 일반적인 <em>저 수준</em>의 작업이지만, PHP가 많은 선택권을 제공하기 때문에 불명확한 작업을 만났을때 택해야할 가장 바람직한 방법을 제안하는 안내서입니다. 예를 들자면, 데이터베이스 연결하기는 PHP에서 많은 방법이 가능한 일반적인 작업이지만, 그것들 전부가 좋은 방법은 아닙니다. 따라서, 이것은 이 문서에 포함됩니다.</p>
+				<p>이 문서는 PHP 프로그래머가 직면할만한 일반적인 <em>저 수준</em><sup class="origin">low level</sup>의 작업이지만, PHP가 많은 선택권을 제공하기 때문에 불명확한 작업을 만났을때 택해야할 가장 바람직한 방법을 제안하는 안내서입니다. 예를 들자면, 데이터베이스 연결하기는 PHP에서 많은 방법이 가능한 일반적인 작업이지만, 그것들 전부가 좋은 방법은 아닙니다. 따라서, 이것은 이 문서에 포함됩니다.</p>
 				<p>이 문서는 해결 방법들을 짧게 소개하고 있습니다. 예제는 여러분을 기본적인 설정을 알려주겠지만, 여러분은 나름대로 관련 자료를 찾아서 유용한 것들로 살을 붙여야 합니다.</p>
 				<p>이 문서는 최신 PHP를 사용하는 것을 가정합니다. 그래서 여러분이 오래된 버전의 PHP를 사용한다면 이러한 해결 방법들에서 사용하는 어떤 기능들을 사용하지 못할지도 모릅니다.</p>
 				<p>이 문서는 살아있는 문서로 PHP가 발전하는 것에 맞춰서 이 문서도 계속 수정하도록 최선을 다할 예정입니다.</p>
 				<h3>이 문서가 <em>포함하지 않는 것</em></h3>
 				<p>이 문서는 PHP 학습서가 아닙니다. PHP의 기본적인 내용과 문법 등은 다른 곳에서 배우셔야 합니다.</p>
-				<p>이 문서는 쿠키 저장이나 캐쉬(caching), 코딩 스타일, 문서화 등과 같은 일반적인 웹 애플리케이션 문제를 위한 안내서가 아닙니다.</p>
+				<p>이 문서는 쿠키 저장이나 캐시<sup class="origin">caching</sup>, 코딩 스타일, 문서화 등과 같은 일반적인 웹 애플리케이션 문제를 위한 안내서가 아닙니다.</p>
 				<p>이 문서는 보안 안내서가 아닙니다. 보안 관련 문제를 조금 다루고 있긴 하지만, 여러분의 PHP 애플리케이션을 안전하게 만들기 위해서는 별도로 관련자료를 찾아보셔야 합니다. 특히, 여기에서 제안한 방법을 구현하기 전에 신중하게 검토하십시오. 여러분의 코드는 여러분 자신의 책임입니다.</p>
 				<p>이 문서는 특정 코딩 스타일이나 패턴, 프레임워크를 주장하지 않습니다.</p>
 				<p>이 문서는 사용자 등록, 로그인 시스템 등과 같은 고 수준 작업을 하기 위한 특정 방법을 옹호하지 않습니다. 이 문서는 철처히 PHP의 긴 역사로 인해서 해결 방법이 복잡하고 불명확할 수 있는 <em>저 수준</em> 작업을 위한 문서입니다.</p>
-				<p>이 문서에 소개된 방법이 가장 중요하거나 <em>단 하나의</em> 방법인 것은 아닙니다. 소개된 어떤 방법들은 여러분의 상황에서는 최선이 아닐 수도 있고, 동일한 결과를 얻기위한 다른 많은 방법이 있습니다. 특히 로드가 심한(high-load) 웹 애플리케이션들은 이런 문제에 대한 더 난해한 해결 방법이 도움이 될 수도 있습니다.</p>
+				<p>이 문서에 소개된 방법이 가장 중요하거나 <em>단 하나의</em> 방법인 것은 아닙니다. 소개된 어떤 방법들은 여러분의 상황에서는 최선이 아닐 수도 있고, 동일한 결과를 얻기위한 다른 많은 방법이 있습니다. 특히 로드가 심한<sup class="origin">high-load</sup> 웹 애플리케이션들은 이런 문제에 대한 더 난해한 해결 방법이 도움이 될 수도 있습니다.</p>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="version">
@@ -105,9 +105,9 @@
 			</section>
 			<section id="passwords">
 				<h2>비밀번호 저장하기</h2>
-				<h3>비밀번호를 해시하고 비교할때 내장(built-in) <a href="http://php.net/book.password">비밀번호 해싱</a> 함수를 사용하세요.</h3>
+				<h3>비밀번호를 해시하고 비교할때 내장<sup class="origin">built-in</sup> <a href="http://php.net/book.password">비밀번호 해싱</a> 함수를 사용하세요.</h3>
 				<p>해싱은 데이터베이스에 저장하기 전에 사용자의 비밀번호를 보호하는 관례적인 방법입니다. md5나 심지어 sha1과 같은 많은 일반적인 해싱 알고리즘은 <a href="http://arstechnica.com/security/2013/05/how-crackers-make-minced-meat-out-of-your-passwords/">해커들이 쉽게 비밀번호를 알아낼 수 있기 때문에</a> 비밀번호를 저장하기에는 안전하지 않습니다.</p>
-				<p>PHP는 현재 비밀번호 해싱을 위한 최고의 알고리즘으로 여기는 bcript 알고리즘을 사용하는 내장(built-in) 비밀번호 해싱 라이브러리를 제공합니다.</p>
+				<p>PHP는 현재 비밀번호 해싱을 위한 최고의 알고리즘으로 여기는 bcript 알고리즘을 사용하는 내장 비밀번호 해싱 라이브러리를 제공합니다.</p>
 				<h4>예제</h4>
 				<code class="php">
 					&lt;?php
@@ -250,8 +250,8 @@
 			</section>
 			<section id="auto-loading">
 				<h2>클래스 오토로딩(Auto-loading)</h2>
-				<h3><code><a href="http://php.net/function.spl-autoload-register">spl_autoload_register()</a></code>를 사용해서 오토로딩 함수(auto-load function)를 등록하세요.</h3>
-				<p>PHP는 아직 읽어오지 않은 클래스를 포한한 파일을 자동으로 불러오는 몇가지 방법을 제공합니다. 오래된 방법은 매직 전역 함수(magic global function)인 <code><a href="http://php.net/function.autoload">__autoload()</a></code>를 사용하는 것입니다. 하지만 한번에 하나의  <code>__autoload()</code> 함수만을 정의할 수 있어서 <code>__autoload()</code> 함수를 사용하는 라이브러리를 포함시키면, 충돌을 일으키게 됩니다.</p>
+				<h3><code><a href="http://php.net/function.spl-autoload-register">spl_autoload_register()</a></code>를 사용해서 오토로딩 함수<sup class="origin">auto-load function</sup>를 등록하세요.</h3>
+				<p>PHP는 아직 읽어오지 않은 클래스를 포한한 파일을 자동으로 불러오는 몇가지 방법을 제공합니다. 오래된 방법은 매직 전역 함수<sup class="origin">magic global function</sup>인 <code><a href="http://php.net/function.autoload">__autoload()</a></code>를 사용하는 것입니다. 하지만 한번에 하나의  <code>__autoload()</code> 함수만을 정의할 수 있어서 <code>__autoload()</code> 함수를 사용하는 라이브러리를 포함시키면, 충돌을 일으키게 됩니다.</p>
 				<p>이런 문제를 해결하는 올바른 방법은 오토로딩 함수를 뭔가 고유한 이름으로 만들고, 이것을 <code><a href="http://php.net/function.spl-autoload-register">spl_autoload_register()</a></code> 함수를 사용하여 등록하는 것입니다. 이 함수는 하나 이상의 <code>__autoload()</code> 함수를 정의하는 것을 허용하기 때문에, 다른 코드의 <code>__autoload()</code> 함수에 문제를 일으킬 우려가 없습니다.</p>
 				<h4>예제</h4>
 				<code class="php">
@@ -279,7 +279,7 @@
 			<section id="quotes">
 				<h2>성능 관점에서의 작은 따옴표와 큰 따옴표</h2>
 				<h3>사실 별 상관없습니다.</h3>
-				<p>문자열을 정의할때 작은 따옴표(')를 사용할지, 큰 따옴표(")를 사용할지에 대해 많은 잉크가 쓰였습니다. 작은 따옴표로 묶인 문자열은 해석되지 않아서 문자열에 적힌 그대로 표시됩니다. 큰 따옴표로 묶인 문자열은 해석되어 문자열 내에 있는 PHP 변수들은 모두 평가(evaluated)됩니다. 줄바꿈을 위한 \n이나 탭을 위한 \t와 같은 이스케이프 문자는 작은 따옴표로 묶인 문자열에서는 <i>평가되지 않지만</i>, 큰 따옴표로 묶인 문자열에서는 <i>평가됩니다</i>.</p>
+				<p>문자열을 정의할때 작은 따옴표(')를 사용할지, 큰 따옴표(")를 사용할지에 대해 많은 잉크가 쓰였습니다. 작은 따옴표로 묶인 문자열은 해석되지 않아서 문자열에 적힌 그대로 표시됩니다. 큰 따옴표로 묶인 문자열은 해석되어 문자열 내에 있는 PHP 변수들은 모두 평가<sup class="origin">evaluated</sup>됩니다. 줄바꿈을 위한 \n이나 탭을 위한 \t와 같은 이스케이프 문자는 작은 따옴표로 묶인 문자열에서는 <i>평가되지 않지만</i>, 큰 따옴표로 묶인 문자열에서는 <i>평가됩니다</i>.</p>
 				<p>큰 따옴표로 묶인 문자열은 실행 시간에 평가되기 때문에, 이론적으로는 작은 따옴표로 묶인 문자열은 평가할 필요가 없어서 성능을 향상시킨다고 합니다. 어느 정도의 규모에서는 사실일지도 모르지만, 평범한 현실적인 애플리케이션에서의 차이는 아무 의미 없을 정도로 작습니다. 그래서 보통의 애플리케이션에서는 무엇을 사용하든지 상관없습니다. <em>극단적으로</em> 부하가 심한 애플리케이션에서는 영향이 약간 있을 수도 있습니다. 여러분의 애플리케이션의 필요에 맞게 선택하시고, 어떤 것을 선택하든지 일관되게 사용하세요.</p>
 				<h4>더 읽을거리</h4>
 				<ul>
@@ -291,13 +291,13 @@
 			</section>
 			<section id="constants">
 				<h2><code>define()</code>과 <code>const</code></h2>
-				<h3>클래스 상수나 가독성, 세부 최적화(micro-optimization)를 고려하는 경우가 아니라면, <code><a href="http://php.net/function.define">define()</a></code> 을 사용하세요.</h3>
+				<h3>클래스 상수나 가독성, 세부 최적화<sup class="origin">micro-optimization</sup>를 고려하는 경우가 아니라면, <code><a href="http://php.net/function.define">define()</a></code> 을 사용하세요.</h3>
 				<p>PHP에서는 통상적으로 <code><a href="http://php.net/function.define">define()</a></code> 함수를 사용하여 상수를 정의했습니다. 하지만 어느 시점에 PHP에는 <code><a href="http://php.net/manual/en/language.oop5.constants.php">const</a></code> 키워드를 사용하여 상수를 정의하는 기능이 추가되었습니다. 상수를 정의할 때에 어떤 방법을 선택해야할까요?</p>
 				<p>정답은 두 방법의 작은 차이에 있습니다.</p>
 				<ol>
 					<li><code>define()</code>은 상수를 실행 시간에 정의하지만, <code>const</code>는 컴파일 시간에 정의합니다. 이렇게 해서 <code>const</code>가 아주 조금은 빠르겠지만, 큰 규모의 소프트웨어를 만드는 것이 아니라면 아무도 신경쓰지 않을 정도입니다.</li>
-					<li>상수 이름에 네임스페이스(namespaces)를 포함시킬 수도 있겠지만, <code>define()</code>은 상수를 전역 상수로 만듭니다. 즉, <code>define()</code>을 사용해서 클래스 상수를 만드는 것은 불가능합니다.</li>
-					<li><code>define()</code>은 상수 이름과 상수값 모두에 표현식(expressions)을 사용할 수 있지만, <code>const</code>는 모두 사용할 수 없습니다. 이 때문에 <code>define()</code>이 훨씬 유연합니다.</li>
+					<li>상수 이름에 네임스페이스<sup class="origin">namespaces</sup>를 포함시킬 수도 있겠지만, <code>define()</code>은 상수를 전역 상수로 만듭니다. 즉, <code>define()</code>을 사용해서 클래스 상수를 만드는 것은 불가능합니다.</li>
+					<li><code>define()</code>은 상수 이름과 상수값 모두에 표현식<sup class="origin">expressions</sup>을 사용할 수 있지만, <code>const</code>는 모두 사용할 수 없습니다. 이 때문에 <code>define()</code>이 훨씬 유연합니다.</li>
 					<li><code>define()</code>은 <code>if()</code> 블록 안에 있을 수 있지만, <code>const</code>는 불가능합니다.</li>
 				</ol>
 				<h4>예제</h4>
@@ -352,7 +352,7 @@
 				<aside>
 					<h3>Ubuntu 12.04 (PHP &lt;= 5.3.10)</h3>
 					<h3><a href="http://php.net/book.apc">APC</a>를 opcode 캐시로 사용하세요.</h3>
-					<p>사용할 수 있는 여러 PHP opcode 캐시들이 있는데, 특히 <a href="http://sourceforge.net/projects/eaccelerator/">eaccelerator</a>나, <a href="http://xcache.lighttpd.net/">xcache</a>, <a href="http://php.net/book.apc">APC</a> 등이 있습니다. APC는 PHP 프로젝트에서 공식적으로 지원하여 가장 활발하게 개발되고 있고, 설치하기 가장 간편합니다. 또한 부가적으로 <a href="http://memcached.org/">memcached</a>와 비슷한 키-값 저장소(persistent key-value store)를 제공합니다. 이런 이유로 APC를 사용하세요.</p>
+					<p>사용할 수 있는 여러 PHP opcode 캐시들이 있는데, 특히 <a href="http://sourceforge.net/projects/eaccelerator/">eaccelerator</a>나, <a href="http://xcache.lighttpd.net/">xcache</a>, <a href="http://php.net/book.apc">APC</a> 등이 있습니다. APC는 PHP 프로젝트에서 공식적으로 지원하여 가장 활발하게 개발되고 있고, 설치하기 가장 간편합니다. 또한 부가적으로 <a href="http://memcached.org/">memcached</a>와 비슷한 키-값 저장소<sup class="origin">persistent key-value store</sup>를 제공합니다. 이런 이유로 APC를 사용하세요.</p>
 					<h4>APC 설치하기</h4>
 					<p>Ubuntu 12.04 터미널에서 아래 명령어를 입력하여 APC를 설치할 수 있습니다.</p>
 					<code class="terminal">sudo apt-get install php-apc</code>
@@ -440,7 +440,7 @@
                 <p>PHP를 사용하기 위해서 웹서버를 설정하는 여러가지 방법이 있습니다. 전통적(이고 끔찍한) 방법은 Apache의 <a href="http://stackoverflow.com/questions/2712825/what-is-mod-php">mod_php</a>를 사용하는 것입니다. Mod_php는 PHP를 Apache 자체에 연결해주지만, Apache는 제대로 관리하지 못합니다. 실제 트래픽을 감당하게 되자마자 심각한 메모리 문제를 격게 될 겁니다.</p>
 				<p>다음 두 가지 새로운 선택이 빠르게 인기를 얻었습니다. 그것은 <a href="http://www.fastcgi.com/mod_fastcgi/docs/mod_fastcgi.html">mod_fastcgi</a>와 <a href="http://httpd.apache.org/mod_fcgid/">mod_fcgid</a>입니다. 두 가지 모두 제한된 수의 PHP 프로세스를 실행하고, Apache가 요청을 이 인터페이스에 보내서, 이것들이 PHP 실행을 관리하도록 합니다. 이 라이브러리들이 실행할 PHP 프로세스 수를 제한하기 때문에 성능에 영향을 미치지 않으면서 메모리 사용량을 크게 줄일 수 있습니다.</p>
                 <p>어느 똑똑한 사람들이 특별히 PHP와 아주 잘 동작하도록 설계된 fastcgi의 구현을 만들었는데, 그 이름은 <a href="http://php.net/manual/en/install.fpm.php">PHP-FPM</a>입니다. 12.04 이후로 이것이 웹서버를 위한 표준 솔루션입니다.</p>
-                <p>Ubuntu 12.04 출시 몇 년 후에, Apache는 PHP-FPM와 연동할 새로운 방법을 내놓았는데, 바로 <a href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html">mod_proxy_fcgi</a>입니다. 안타깝지만 Ubuntu 14.04에 포함된 Apache 버전에는 이 모듈에 약간 문제가 있습니다. 소켓 기반의 연결을 사용할 수 없고, mod_rewrite관련 이슈와, 404와 같은 페이지에 문제(issues with 404 and similar pages)가 있습니다. 따라서, Ubuntu 12.04에서 사용했던 검증된 PHP-FPM 사용법을 사용하세요.</p>
+                <p>Ubuntu 12.04 출시 몇 년 후에, Apache는 PHP-FPM와 연동할 새로운 방법을 내놓았는데, 바로 <a href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html">mod_proxy_fcgi</a>입니다. 안타깝지만 Ubuntu 14.04에 포함된 Apache 버전에는 이 모듈에 약간 문제가 있습니다. 소켓 기반의 연결을 사용할 수 없고, mod_rewrite관련 이슈와, 404와 같은 페이지에 문제<sup class="origin">issues with 404 and similar pages</sup>가 있습니다. 따라서, Ubuntu 12.04에서 사용했던 검증된 PHP-FPM 사용법을 사용하세요.</p>
                 <p>아래 예제는 Apache 2.4.7을 위한 것이지만, PHP-FPM는 Nginx와 같은 다른 웹서버들과도 동작합니다.</p>
 				<h4>PHP-FPM과 Apache 설치하기</h4>
                 <p>아래 명령어를 터미널에서 실행하여 Ubuntu 14.04에 PHP-FPM과 Apache를 설치할 수 있습니다.</p>
