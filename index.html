@@ -70,8 +70,8 @@
 			<h2>PHP Best Practices</h2>
 			<section id="maintainers">
 				<h2>Last revised &amp; maintainers</h2>
-				<p>This document was last reviewed on July 3, 2014. It was last changed on July 3, 2014.</p>
-				<p>It's maintained by me, <a href="https://alexcabal.com" rel="author">Alex Cabal</a>. I've been writing PHP for a long time now, and currently I run <a href="http://www.scribophile.com/">Scribophile, an online writing group for serious writers</a>, <a href="http://writerfolio.com">Writerfolio, an easy online writing portfolio for freelancers</a>, and <a href="https://standardebooks.com">Standard Ebooks, a publisher of illustrated, DRM-free public domain ebooks</a>. On occasion I freelance for projects and clients that interest me.</p>
+				<p>This document was last reviewed on July 3, 2014. It was last changed on December 8, 2015.</p>
+				<p>It's maintained by me, <a href="https://alexcabal.com" rel="author">Alex Cabal</a>. I've been writing PHP for a long time now, and currently I run <a href="http://www.scribophile.com/">Scribophile, an online writing group for serious writers</a>, <a href="http://writerfolio.com">Writerfolio, an easy online writing portfolio for freelancers</a>, and <a href="https://standardebooks.org">Standard Ebooks, an open source project that produces free and libre commercial-quality ebooks of public domain literature</a>.</p>
 				<p><a href="https://alexcabal.com/contact/">Drop me a line</a> if you think I can help you with something, or with suggestions or corrections to this document.</p>
 				<p class="back"><a href="#">Back to top</a></p>
 			</section>
@@ -118,12 +118,12 @@
 					&lt;?php
 					// Hash the password.  $hashedPassword will be a 60-character string.
 					$hashedPassword = password_hash('my super cool password', PASSWORD_DEFAULT);
-			
+
 					// You can now safely store the contents of $hashedPassword in your database!
-			
+
 					// Check if a user has provided the correct password by comparing what they typed with our hash
 					password_verify('the wrong password', $hashedPassword); // false
-			
+
 					password_verify('my super cool password', $hashedPassword); // true
 					?&gt;</code>
 				<h4>Gotchas</h4>
@@ -145,19 +145,19 @@
 						&lt;?php
 						// Include the phpass library
 						require_once('phpass-0.3/PasswordHash.php');
-			
+
 						// Initialize the hasher without portable hashes (this is more secure)
 						$hasher = new PasswordHash(8, false);
-			
+
 						// Hash the password.  $hashedPassword will be a 60-character string.
-						$hashedPassword = $hasher->HashPassword('my super cool password');
-			
+						$hashedPassword = $hasher-&gt;HashPassword('my super cool password');
+
 						// You can now safely store the contents of $hashedPassword in your database!
-			
+
 						// Check if a user has provided the correct password by comparing what they typed with our hash
-						$hasher->CheckPassword('the wrong password', $hashedPassword); // false
-			
-						$hasher->CheckPassword('my super cool password', $hashedPassword); // true
+						$hasher-&gt;CheckPassword('the wrong password', $hashedPassword); // false
+
+						$hasher-&gt;CheckPassword('my super cool password', $hashedPassword); // true
 						?&gt;</code>
 					<h4>Further reading</h4>
 					<ul>
@@ -185,37 +185,37 @@
 						// The PDO options we pass do the following:
 						// \PDO::ATTR_ERRMODE enables exceptions for errors.  This is optional but can be handy.
 						// \PDO::ATTR_PERSISTENT disables persistent connections, which can cause concurrency issues in certain cases.  See "Gotchas".
-						$link = new \PDO(	'mysql:host=your-hostname;dbname=your-db;charset=utf8mb4', 
-											'your-username', 
-											'your-password', 
+						$link = new \PDO(	'mysql:host=your-hostname;dbname=your-db;charset=utf8mb4',
+											'your-username',
+											'your-password',
 											array(
-												\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, 
-												\PDO::ATTR_PERSISTENT => false
+												\PDO::ATTR_ERRMODE =&gt; \PDO::ERRMODE_EXCEPTION,
+												\PDO::ATTR_PERSISTENT =&gt; false
 											)
 										);
 
-						$handle = $link->prepare('select Username from Users where UserId = ? or Username = ? limit ?');
+						$handle = $link-&gt;prepare('select Username from Users where UserId = ? or Username = ? limit ?');
 
 						// PHP bug: if you don't specify PDO::PARAM_INT, PDO may enclose the argument in quotes.  This can mess up some MySQL queries that don't expect integers to be quoted.
 						// See: https://bugs.php.net/bug.php?id=44639
 						// If you're not sure whether the value you're passing is an integer, use the is_int() function.
-						$handle->bindValue(1, 100, PDO::PARAM_INT);
-						$handle->bindValue(2, 'Bilbo Baggins');
-						$handle->bindValue(3, 5, PDO::PARAM_INT);
+						$handle-&gt;bindValue(1, 100, PDO::PARAM_INT);
+						$handle-&gt;bindValue(2, 'Bilbo Baggins');
+						$handle-&gt;bindValue(3, 5, PDO::PARAM_INT);
 
-						$handle->execute();
+						$handle-&gt;execute();
 
 						// Using the fetchAll() method might be too resource-heavy if you're selecting a truly massive amount of rows.
 						// If that's the case, you can use the fetch() method and loop through each result row one by one.
 						// You can also return arrays and other things instead of objects.  See the PDO documentation for details.
-						$result = $handle->fetchAll(\PDO::FETCH_OBJ);
+						$result = $handle-&gt;fetchAll(\PDO::FETCH_OBJ);
 
 						foreach($result as $row){
-							print($row->Username);
+							print($row-&gt;Username);
 						}
 					}
 					catch(\PDOException $ex){
-						print($ex->getMessage());
+						print($ex-&gt;getMessage());
 					}
 					?&gt;</code>
 				<h4>Gotchas</h4>
@@ -265,10 +265,10 @@
 					function MyAutoload($className){
 						include_once($className . '.php');
 					}
-			
+
 					// Next, register it with PHP.
 					spl_autoload_register('MyAutoload');
-			
+
 					// Try it out!
 					// Since we haven't included a file defining the MyClass object, our auto-loader will kick in and include MyClass.php.
 					// For this example, assume the MyClass class is defined in the MyClass.php file.
@@ -312,22 +312,22 @@
 					namespace MiddleEarth\Creatures\Dwarves;
 					const GIMLI_ID = 1;
 					define('MiddleEarth\Creatures\Elves\LEGOLAS_ID', 2);
-				
+
 					echo(\MiddleEarth\Creatures\Dwarves\GIMLI_ID);	// 1
 					echo(\MiddleEarth\Creatures\Elves\LEGOLAS_ID);	// 2; note that we used define(), but the namespace is still recognized
-				
+
 					// Now let's declare some bit-shifted constants representing ways to enter Mordor.
 					define('TRANSPORT_METHOD_SNEAKING', 1 &lt;&lt; 0); // OK!
 					const TRANSPORT_METHOD_WALKING = 1 &lt;&lt; 1; // Compile error! const can't use expressions as values
-				
+
 					// Next, conditional constants.
 					define('HOBBITS_FRODO_ID', 1);
-				
+
 					if($isGoingToMordor){
 						define('TRANSPORT_METHOD', TRANSPORT_METHOD_SNEAKING); // OK!
 						const PARTY_LEADER_ID = HOBBITS_FRODO_ID // Compile error: const can't be used in an if block
 					}
-				
+
 					// Finally, class constants
 					class OneRing{
 						const MELTING_POINT_CELSIUS = 1000000; // OK!
@@ -396,16 +396,16 @@
 					apc_store('username-1532', 'Frodo Baggins');
 					apc_store('username-958', 'Aragorn');
 					apc_store('username-6389', 'Gandalf');
-		
+
 					// After storing these values, any PHP script can access them, no matter when it's run!
 					$value = apc_fetch('username-958', $success);
 					if($success === true)
 						print($value); // Aragorn
-			
+
 					$value = apc_fetch('username-1', $success); // $success will be set to boolean false, because this key doesn't exist.
 					if($success !== true) // Note the !==, this checks for true boolean false, not "falsey" values like 0 or empty string.
 						print('Key not found');
-		
+
 					apc_delete('username-958'); // This key will no longer be available.
 					?&gt;</code>
 				<h4>Further reading</h4>
@@ -418,7 +418,7 @@
 				<aside>
 					<h3>Ubuntu 12.04 (PHP &lt;= 5.3.10)</h3>
 					<h3>Using <a href="http://php.net/manual/en/book.apc.php">APC</a> instead of Memcached</h3>
-					<p>If you're using APC as both a key-value store and an opcode cache in Ubuntu 12.04, then the example above will also work&mdash;APC and APCu have an identical API.</p>
+					<p>If you're using APC as both a key-value store and an opcode cache in Ubuntu 12.04, then the example above will also work&mdash;APC and APCu have an identical API.  (Well, <em>almost</em> identical: the APC functions <code>apc_define_constants</code> and <code>apc_load_constants</code> weren't ported to APCu.)</p>
 					<p>See the <a href="#opcode-cache">section on opcode caching</a> for instructions on how to install APC on Ubuntu 12.04.</p>
 					<h4>Further reading</h4>
 					<ul>
@@ -500,31 +500,31 @@
 					&lt;?php
 					// Include the PHPMailer library
 					require_once('phpmailer-5.2.7/PHPMailerAutoload.php');
-			
+
 					// Passing 'true' enables exceptions.  This is optional and defaults to false.
 					$mailer = new PHPMailer(true);
-			
+
 					// Send a mail from Bilbo Baggins to Gandalf the Grey
-			
+
 					// Set up to, from, and the message body.  The body doesn't have to be HTML; check the PHPMailer documentation for details.
-					$mailer->Sender = 'bbaggins@example.com';
-					$mailer->AddReplyTo('bbaggins@example.com', 'Bilbo Baggins');
-					$mailer->SetFrom('bbaggins@example.com', 'Bilbo Baggins');
-					$mailer->AddAddress('gandalf@example.com');
-					$mailer->Subject = 'The finest weed in the South Farthing';
-					$mailer->MsgHTML('&lt;p&gt;You really must try it, Gandalf!&lt;/p&gt;&lt;p&gt;-Bilbo&lt;/p&gt;');
-			
+					$mailer-&gt;Sender = 'bbaggins@example.com';
+					$mailer-&gt;AddReplyTo('bbaggins@example.com', 'Bilbo Baggins');
+					$mailer-&gt;SetFrom('bbaggins@example.com', 'Bilbo Baggins');
+					$mailer-&gt;AddAddress('gandalf@example.com');
+					$mailer-&gt;Subject = 'The finest weed in the South Farthing';
+					$mailer-&gt;MsgHTML('&lt;p&gt;You really must try it, Gandalf!&lt;/p&gt;&lt;p&gt;-Bilbo&lt;/p&gt;');
+
 					// Set up our connection information.
-					$mailer->IsSMTP();
-					$mailer->SMTPAuth = true;
-					$mailer->SMTPSecure = 'ssl';
-					$mailer->Port = 465;
-					$mailer->Host = 'my smtp host';
-					$mailer->Username = 'my smtp username';
-					$mailer->Password = 'my smtp password';
-			
+					$mailer-&gt;IsSMTP();
+					$mailer-&gt;SMTPAuth = true;
+					$mailer-&gt;SMTPSecure = 'ssl';
+					$mailer-&gt;Port = 465;
+					$mailer-&gt;Host = 'my smtp host';
+					$mailer-&gt;Username = 'my smtp username';
+					$mailer-&gt;Password = 'my smtp password';
+
 					// All done!
-					$mailer->Send();
+					$mailer-&gt;Send();
 					?&gt;</code>
 				<h4>Further reading</h4>
 				<ul>
@@ -565,7 +565,7 @@
 					&lt;?php
 					// Oh no!  The user has submitted malicious HTML, and we have to display it in our web app!
 					$evilHtml = '&lt;div onclick="xss();"&gt;Mua-ha-ha!  Twiddling my evil mustache...&lt;/div&gt;';
-			
+
 					// Use the ENT_QUOTES flag to make sure both single and double quotes are escaped.
 					// Use the UTF-8 character encoding if you've stored the text as UTF-8 (as you should have).
 					// See the UTF-8 section in this document for more details.
@@ -581,14 +581,14 @@
 					&lt;?php
 					// Include the HTML Purifier library
 					require_once('htmlpurifier-4.6.0/HTMLPurifier.auto.php');
-			
+
 					// Oh no!  The user has submitted malicious HTML, and we have to display it in our web app!
 					$evilHtml = '&lt;div onclick="xss();"&gt;Mua-ha-ha!  Twiddling my evil mustache...&lt;/div&gt;';
-			
+
 					// Set up the HTML Purifier object with the default configuration.
 					$purifier = new HTMLPurifier(HTMLPurifier_Config::createDefault());
-			
-					$safeHtml = $purifier->purify($evilHtml); // $safeHtml is now sanitized.  You can output $safeHtml to your users without fear!
+
+					$safeHtml = $purifier-&gt;purify($evilHtml); // $safeHtml is now sanitized.  You can output $safeHtml to your users without fear!
 					?&gt;</code>
 				<h4>Gotchas</h4>
 				<ul>
@@ -622,23 +622,23 @@
 				<p>To make sure your strings go from PHP to MySQL as UTF-8, make sure your database and tables are all set to the utf8mb4 character set and collation, and that you use the utf8mb4 character set in the PDO connection string. For an example, see the section on <a href="#mysql">connecting to and querying a MySQL database</a>. This is <em>critically important</em>.</p>
 				<p>Note that you must use the utf8mb4 character set for complete UTF-8 support, <em>not</em> the utf8 character set! See <a href="#utf8-further-reading">Further Reading</a> for why.</p>
 				<h4>UTF-8 at the browser level</h4>
-				<p>Use the <code><a href="http://php.net/manual/en/function.mb-http-output.php">mb_http_output()</a></code> function to ensure that your PHP script outputs UTF-8 strings to your browser. In your HTML, include the <code><a href="http://htmlpurifier.org/docs/enduser-utf8.html">charset</a></code> meta tag in your page's <code>&lt;head&gt;</code> tag.
-					<h4>Example</h4>
-					<code class="php">
+				<p>Use the <code><a href="http://php.net/manual/en/function.mb-http-output.php">mb_http_output()</a></code> function to ensure that your PHP script outputs UTF-8 strings to your browser. In your HTML, include the <code><a href="http://htmlpurifier.org/docs/enduser-utf8.html">charset</a></code> meta tag in your page's <code>&lt;head&gt;</code> tag.</p>
+				<h4>Example</h4>
+				<code class="php">
 					&lt;?php
 					// Tell PHP that we're using UTF-8 strings until the end of the script
 					mb_internal_encoding('UTF-8');
-			
+
 					// Tell PHP that we'll be outputting UTF-8 to the browser
 					mb_http_output('UTF-8');
-			
+
 					// Our UTF-8 test string
 					$string = 'Êl síla erin lû e-govaned vîn.';
-			
+
 					// Transform the string in some way with a multibyte function
 					// Note how we cut the string at a non-Ascii character for demonstration purposes
 					$string = mb_substr($string, 0, 15);
-			
+
 					// Connect to a database to store the transformed string
 					// See the PDO example in this document for more information
 					// Note that we define the character set as utf8mb4 in the PDO connection string
@@ -646,25 +646,25 @@
 										'your-username',
 			 							'your-password',
 										array(
-											\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-											\PDO::ATTR_PERSISTENT => false
+											\PDO::ATTR_ERRMODE =&gt; \PDO::ERRMODE_EXCEPTION,
+											\PDO::ATTR_PERSISTENT =&gt; false
 										)
 									);
-					
+
 					// Store our transformed string as UTF-8 in our database
 					// Your DB and tables are in the utf8mb4 character set and collation, right?
-					$handle = $link->prepare('insert into ElvishSentences (Id, Body) values (?, ?)');
-					$handle->bindValue(1, 1, PDO::PARAM_INT);
-					$handle->bindValue(2, $string);
-					$handle->execute();
-			  		
+					$handle = $link-&gt;prepare('insert into ElvishSentences (Id, Body) values (?, ?)');
+					$handle-&gt;bindValue(1, 1, PDO::PARAM_INT);
+					$handle-&gt;bindValue(2, $string);
+					$handle-&gt;execute();
+
 					// Retrieve the string we just stored to prove it was stored correctly
-					$handle = $link->prepare('select * from ElvishSentences where Id = ?');
-					$handle->bindValue(1, 1, PDO::PARAM_INT);
-					$handle->execute();
-					
+					$handle = $link-&gt;prepare('select * from ElvishSentences where Id = ?');
+					$handle-&gt;bindValue(1, 1, PDO::PARAM_INT);
+					$handle-&gt;execute();
+
 					// Store the result into an object that we'll output later in our HTML
-					$result = $handle->fetchAll(\PDO::FETCH_OBJ);
+					$result = $handle-&gt;fetchAll(\PDO::FETCH_OBJ);
 					?&gt;&lt;!doctype html&gt;
 					&lt;html&gt;
 						&lt;head&gt;
@@ -674,20 +674,21 @@
 						&lt;body&gt;
 							&lt;?php
 							foreach($result as $row){
-								print($row->Body);  // This should correctly output our transformed UTF-8 string to the browser
+								print($row-&gt;Body);  // This should correctly output our transformed UTF-8 string to the browser
 							}
 							?&gt;
 						&lt;/body&gt;
-					&lt;/html&gt;</code>
-					<h4 id="utf8-further-reading">Further reading</h4>
-					<ul>
-						<li><a href="http://php.net/manual/en/ref.mbstring.php">PHP Manual: Multibyte String Functions</a></li>
-						<li><a href="http://blog.loftdigital.com/blog/php-utf-8-cheatsheet">PHP UTF-8 Cheatsheet</a></li>
-						<li><a href="http://stackoverflow.com/questions/571694/what-factors-make-php-unicode-incompatible">Stack Overflow: What factors make PHP Unicode-incompatible?</a></li>
-						<li><a href="http://stackoverflow.com/questions/140728/best-practices-in-php-and-mysql-with-international-strings">Stack Overflow: Best practices in PHP and MySQL with international strings</a></li>
-						<li><a href="http://mathiasbynens.be/notes/mysql-utf8mb4">How to support full Unicode in MySQL databases</a></li>
-					</ul>
-					<p class="back"><a href="#">Back to top</a></p>
+					&lt;/html&gt;
+				</code>
+				<h4 id="utf8-further-reading">Further reading</h4>
+				<ul>
+					<li><a href="http://php.net/manual/en/ref.mbstring.php">PHP Manual: Multibyte String Functions</a></li>
+					<li><a href="http://blog.loftdigital.com/blog/php-utf-8-cheatsheet">PHP UTF-8 Cheatsheet</a></li>
+					<li><a href="http://stackoverflow.com/questions/571694/what-factors-make-php-unicode-incompatible">Stack Overflow: What factors make PHP Unicode-incompatible?</a></li>
+					<li><a href="http://stackoverflow.com/questions/140728/best-practices-in-php-and-mysql-with-international-strings">Stack Overflow: Best practices in PHP and MySQL with international strings</a></li>
+					<li><a href="http://mathiasbynens.be/notes/mysql-utf8mb4">How to support full Unicode in MySQL databases</a></li>
+				</ul>
+				<p class="back"><a href="#">Back to top</a></p>
 			</section>
 			<section id="working-with-dates-and-times">
 				<h2>Working with dates and times</h2>
@@ -701,16 +702,16 @@
 					$date = new DateTime('2011-05-04 05:00:00', new DateTimeZone('UTC'));
 
 					// Add ten days to our initial date
-					$date->add(new DateInterval('P10D'));
+					$date-&gt;add(new DateInterval('P10D'));
 
-					echo($date->format('Y-m-d h:i:s')); // 2011-05-14 05:00:00
+					echo($date-&gt;format('Y-m-d h:i:s')); // 2011-05-14 05:00:00
 
 					// Sadly we don't have a Middle Earth timezone
 					// Convert our UTC date to the PST (or PDT, depending) time zone
-					$date->setTimezone(new DateTimeZone('America/Los_Angeles'));
+					$date-&gt;setTimezone(new DateTimeZone('America/Los_Angeles'));
 
 					// Note that if you run this line yourself, it might differ by an hour depending on daylight savings
-					echo($date->format('Y-m-d h:i:s')); // 2011-05-13 10:00:00
+					echo($date-&gt;format('Y-m-d h:i:s')); // 2011-05-13 10:00:00
 
 					$later = new DateTime('2012-05-20', new DateTimeZone('UTC'));
 
@@ -719,9 +720,9 @@
 						echo('Yup, you can compare dates using these easy operators!');
 
 					// Find the difference between two dates
-					$difference = $date->diff($later);
+					$difference = $date-&gt;diff($later);
 
-					echo('The 2nd date is ' . $difference['days'] . ' later than 1st date.');
+					echo('The 2nd date is ' . $difference->days . ' later than 1st date.');
 					?&gt;
 					</code>
 				<h4>Gotchas</h4>
@@ -753,32 +754,32 @@
 			<section id="checking-for-null">
 				<h2>Checking if a value is null or false</h2>
 				<h3>Use the <code><a href="http://php.net/manual/en/language.operators.comparison.php">===</a></code> operator to check for null and boolean false values.</h3>
-				<p>PHP's loose typing system offers many different ways of checking a variable's value. However it also presents a lot of problems. Using <code><a href="http://php.net/manual/en/language.operators.comparison.php">==</a></code> to check if a value is null or false can return false positives if the value is actually an empty string or 0. <code><a href="http://php.net/manual/en/function.isset.php">isset()</a></code> checks whether a variable has a value, <em>not</em> whether that value is null or false, so it's not appropriate to use here.</p>
+				<p>PHP's loose typing system offers many different ways of checking a variable's value. However it also presents a lot of problems. Using <code><a href="http://php.net/manual/en/language.operators.comparison.php">==</a></code> to check if a value is null or false can return false positives if the value is actually an empty string or 0. <code><a href="http://php.net/manual/en/function.isset.php">isset()</a></code> checks whether a variable has a value that is not null, but doesn't check against boolean <code>false</code>.</p>
 				<p>The <code><a href="http://php.net/manual/en/function.is-null.php">is_null()</a></code> function accurately checks if a value is null, and the <code><a href="http://php.net/manual/en/function.is-bool.php">is_bool()</a></code> function checks if it's a boolean value (like <code>false</code>), but there's an even better option: the <code><a href="http://php.net/manual/en/language.operators.comparison.php">===</a></code> operator. <code>===</code> checks if the values are <em>identical</em>, which is not the same as <em>equivalent</em> in PHP's loosely-typed world. It's also slightly faster than <code>is_null()</code> and <code>is_bool()</code>, and looks nicer than using a function for comparison.</p>
 				<h4>Example</h4>
 				<code class="php">
 					&lt;?php
 					$x = 0;
 					$y = null;
-			
+
 					// Is $x null?
 					if($x == null)
 						print('Oops! $x is 0, not null!');
-				
+
 					// Is $y null?
 					if(is_null($y))
 						print('Great, but could be faster.');
-				
+
 					if($y === null)
 						print('Perfect!');
-			
+
 					// Does the string abc contain the character a?
 					if(strpos('abc', 'a'))
 						// GOTCHA!  strpos returns 0, indicating it wishes to return the position of the first character.
 						// But PHP interpretes 0 as false, so we never reach this print statement!
-						print('Found it!'); 
-			
-					//Solution: use !== (the opposite of ===) to see if strpos() returns 0, or boolean false.	
+						print('Found it!');
+
+					//Solution: use !== (the opposite of ===) to see if strpos() returns 0, or boolean false.
 					if(strpos('abc', 'a') !== false)
 						print('Found it for real this time!');
 					?&gt;</code>
@@ -802,7 +803,7 @@
 		</article>
 	</main>
 	<footer>
-		<a rel="bookmark" href="/">PHP Best Practices</a> by <a rel="author" href="https://alexcabal.com">Alex Cabal</a> is released into the <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>. <a href="https://alexcabal.com/why-i-release-things-into-the-public-domain">Why?</a>
+		<a rel="bookmark" href="/">PHP Best Practices</a> by <a href="https://alexcabal.com" rel="author">Alex Cabal</a> is released into the <a href="https://en.wikipedia.org/wiki/Public_domain">public domain</a> via the <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 Public Domain Dedication</a>. <a href="https://alexcabal.com/why-i-release-things-into-the-public-domain">Why?</a>
 	</footer>
 </body>
 
