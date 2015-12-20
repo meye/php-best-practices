@@ -62,11 +62,11 @@
 			<h2>PHP Best Practices</h2>
 			<section id="maintainers">
 				<h2>최신 개정판 &amp; 관리자</h2>
-				<p>이 문서는 2014년 7월 3일에 최종 검수, 2014년 7월 3일에 최종 수정되었습니다.</p>
-				<p>이 문서는 <a href="https://alexcabal.com" rel="author">Alex Cabal</a>이 관리하고 있습니다. 오랜 기간 PHP를 작성해왔고, 현재 <a href="http://www.scribophile.com/">진지한 작가를 위한 온라인 글쓰기 그룹인 Scribophile</a>, <a href="http://writerfolio.com">프리랜서를 위한 쉬운 온라인 글쓰기 포트폴리오인 Writerfolio</a>, <a href="https://standardebooks.com">삽화가 들어간 DRM없는 퍼블릭 도메인 eBook을 출판하는 Standard Ebooks</a> 등을 운영하고 있습니다. 가끔 흥미를 갖게하는 프로젝트나 의뢰인들을 위해서 프리랜서로 일합니다.</p>
+				<p>이 문서는 2014년 7월 3일에 최종 검수, 2015년 12월 8일에 최종 수정되었습니다.</p>
+				<p>이 문서는 <a href="https://alexcabal.com" rel="author">Alex Cabal</a>이 관리하고 있습니다. 오랜 기간 PHP를 작성해왔고, 현재 <a href="http://www.scribophile.com/">진지한 작가를 위한 온라인 글쓰기 그룹인 Scribophile</a>, <a href="http://writerfolio.com">프리랜서를 위한 쉬운 온라인 글쓰기 포트폴리오인 Writerfolio</a>, <a href="https://standardebooks.com">상업적인 수준의 자유로운 퍼블릭 도메인 eBook을 만드는 오픈소스 프로젝트 Standard Ebooks</a> 등을 운영하고 있습니다.</p>
 				<p>뭔가 도울 일이 있거나 이 문서에 어떤 제안이나 정정할 것이 있다면 <a href="https://alexcabal.com/contact/">연락주세요.</a></p>
 				<h4>한국어판 안내</h4>
-				<p>이 문서는 2014년 7월 3일에 수정된 내용을 기반으로 2015년 5월 23일에 최종 번역되었습니다. 한국어판에 대한 제안/문의는 <a href="https://github.com/meye/php-best-practices/issues">Github 저장소</a>에 이슈로 남겨주세요.</p>
+				<p>이 문서는 2015년 12월 8일에 수정된 내용을 기반으로 2015년 12월 20일에 최종 번역되었습니다. 한국어판에 대한 제안/문의는 <a href="https://github.com/meye/php-best-practices/issues">Github 저장소</a>에 이슈로 남겨주세요.</p>
 
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
@@ -145,14 +145,14 @@
 						$hasher = new PasswordHash(8, false);
 
 						// Hash the password.  $hashedPassword will be a 60-character string.
-						$hashedPassword = $hasher->HashPassword('my super cool password');
+						$hashedPassword = $hasher-&gt;HashPassword('my super cool password');
 
 						// You can now safely store the contents of $hashedPassword in your database!
 
 						// Check if a user has provided the correct password by comparing what they typed with our hash
-						$hasher->CheckPassword('the wrong password', $hashedPassword); // false
+						$hasher-&gt;CheckPassword('the wrong password', $hashedPassword); // false
 
-						$hasher->CheckPassword('my super cool password', $hashedPassword); // true
+						$hasher-&gt;CheckPassword('my super cool password', $hashedPassword); // true
 						?&gt;</code>
 					<h4>더 읽을거리</h4>
 					<ul>
@@ -184,33 +184,33 @@
 											'your-username',
 											'your-password',
 											array(
-												\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-												\PDO::ATTR_PERSISTENT => false
+												\PDO::ATTR_ERRMODE =&gt; \PDO::ERRMODE_EXCEPTION,
+												\PDO::ATTR_PERSISTENT =&gt; false
 											)
 										);
 
-						$handle = $link->prepare('select Username from Users where UserId = ? or Username = ? limit ?');
+						$handle = $link-&gt;prepare('select Username from Users where UserId = ? or Username = ? limit ?');
 
 						// PHP bug: if you don't specify PDO::PARAM_INT, PDO may enclose the argument in quotes.  This can mess up some MySQL queries that don't expect integers to be quoted.
 						// See: https://bugs.php.net/bug.php?id=44639
 						// If you're not sure whether the value you're passing is an integer, use the is_int() function.
-						$handle->bindValue(1, 100, PDO::PARAM_INT);
-						$handle->bindValue(2, 'Bilbo Baggins');
-						$handle->bindValue(3, 5, PDO::PARAM_INT);
+						$handle-&gt;bindValue(1, 100, PDO::PARAM_INT);
+						$handle-&gt;bindValue(2, 'Bilbo Baggins');
+						$handle-&gt;bindValue(3, 5, PDO::PARAM_INT);
 
-						$handle->execute();
+						$handle-&gt;execute();
 
 						// Using the fetchAll() method might be too resource-heavy if you're selecting a truly massive amount of rows.
 						// If that's the case, you can use the fetch() method and loop through each result row one by one.
 						// You can also return arrays and other things instead of objects.  See the PDO documentation for details.
-						$result = $handle->fetchAll(\PDO::FETCH_OBJ);
+						$result = $handle-&gt;fetchAll(\PDO::FETCH_OBJ);
 
 						foreach($result as $row){
-							print($row->Username);
+							print($row-&gt;Username);
 						}
 					}
 					catch(\PDOException $ex){
-						print($ex->getMessage());
+						print($ex-&gt;getMessage());
 					}
 					?&gt;</code>
 				<h4>참고</h4>
@@ -413,7 +413,7 @@
 				<aside>
 					<h3>Ubuntu 12.04 (PHP &lt;= 5.3.10)</h3>
 					<h3>Memcached 대신에 <a href="http://php.net/book.apc">APC</a>를 사용하세요.</h3>
-					<p>Ubuntu 12.04에서 키-값 저장소와 opcode 캐시로 APC를 사용한다면, (APC와 APCu는 API가 동일하기때문에) 위의 예제도 잘 동작합니다.</p>
+					<p>Ubuntu 12.04에서 키-값 저장소와 opcode 캐시로 APC를 사용한다면, (APC와 APCu는 API가 동일하기때문에) 위의 예제도 잘 동작합니다. (음.. <em>거의</em> 동일합니다. APC 함수 <code>apc_define_constants</code>, <code>apc_load_constants</code>는 APCu로 포팅되지 않았습니다.)</p>
 					<p>Ubuntu 12.04에 APC를 설치하는 방법에 대해서는 <a href="#opcode-cache">opcode 캐시 부분</a>을 참고하세요.</p>
 					<h4>더 읽을거리</h4>
 					<ul>
@@ -502,24 +502,24 @@
 					// Send a mail from Bilbo Baggins to Gandalf the Grey
 
 					// Set up to, from, and the message body.  The body doesn't have to be HTML; check the PHPMailer documentation for details.
-					$mailer->Sender = 'bbaggins@example.com';
-					$mailer->AddReplyTo('bbaggins@example.com', 'Bilbo Baggins');
-					$mailer->SetFrom('bbaggins@example.com', 'Bilbo Baggins');
-					$mailer->AddAddress('gandalf@example.com');
-					$mailer->Subject = 'The finest weed in the South Farthing';
-					$mailer->MsgHTML('&lt;p&gt;You really must try it, Gandalf!&lt;/p&gt;&lt;p&gt;-Bilbo&lt;/p&gt;');
+					$mailer-&gt;Sender = 'bbaggins@example.com';
+					$mailer-&gt;AddReplyTo('bbaggins@example.com', 'Bilbo Baggins');
+					$mailer-&gt;SetFrom('bbaggins@example.com', 'Bilbo Baggins');
+					$mailer-&gt;AddAddress('gandalf@example.com');
+					$mailer-&gt;Subject = 'The finest weed in the South Farthing';
+					$mailer-&gt;MsgHTML('&lt;p&gt;You really must try it, Gandalf!&lt;/p&gt;&lt;p&gt;-Bilbo&lt;/p&gt;');
 
 					// Set up our connection information.
-					$mailer->IsSMTP();
-					$mailer->SMTPAuth = true;
-					$mailer->SMTPSecure = 'ssl';
-					$mailer->Port = 465;
-					$mailer->Host = 'my smtp host';
-					$mailer->Username = 'my smtp username';
-					$mailer->Password = 'my smtp password';
+					$mailer-&gt;IsSMTP();
+					$mailer-&gt;SMTPAuth = true;
+					$mailer-&gt;SMTPSecure = 'ssl';
+					$mailer-&gt;Port = 465;
+					$mailer-&gt;Host = 'my smtp host';
+					$mailer-&gt;Username = 'my smtp username';
+					$mailer-&gt;Password = 'my smtp password';
 
 					// All done!
-					$mailer->Send();
+					$mailer-&gt;Send();
 					?&gt;</code>
 				<h4>더 읽을거리</h4>
 				<ul>
@@ -583,7 +583,7 @@
 					// Set up the HTML Purifier object with the default configuration.
 					$purifier = new HTMLPurifier(HTMLPurifier_Config::createDefault());
 
-					$safeHtml = $purifier->purify($evilHtml); // $safeHtml is now sanitized.  You can output $safeHtml to your users without fear!
+					$safeHtml = $purifier-&gt;purify($evilHtml); // $safeHtml is now sanitized.  You can output $safeHtml to your users without fear!
 					?&gt;</code>
 				<h4>참고</h4>
 				<ul>
@@ -641,25 +641,25 @@
 										'your-username',
 			 							'your-password',
 										array(
-											\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-											\PDO::ATTR_PERSISTENT => false
+											\PDO::ATTR_ERRMODE =&gt; \PDO::ERRMODE_EXCEPTION,
+											\PDO::ATTR_PERSISTENT =&gt; false
 										)
 									);
 
 					// Store our transformed string as UTF-8 in our database
 					// Your DB and tables are in the utf8mb4 character set and collation, right?
-					$handle = $link->prepare('insert into ElvishSentences (Id, Body) values (?, ?)');
-					$handle->bindValue(1, 1, PDO::PARAM_INT);
-					$handle->bindValue(2, $string);
-					$handle->execute();
+					$handle = $link-&gt;prepare('insert into ElvishSentences (Id, Body) values (?, ?)');
+					$handle-&gt;bindValue(1, 1, PDO::PARAM_INT);
+					$handle-&gt;bindValue(2, $string);
+					$handle-&gt;execute();
 
 					// Retrieve the string we just stored to prove it was stored correctly
-					$handle = $link->prepare('select * from ElvishSentences where Id = ?');
-					$handle->bindValue(1, 1, PDO::PARAM_INT);
-					$handle->execute();
+					$handle = $link-&gt;prepare('select * from ElvishSentences where Id = ?');
+					$handle-&gt;bindValue(1, 1, PDO::PARAM_INT);
+					$handle-&gt;execute();
 
 					// Store the result into an object that we'll output later in our HTML
-					$result = $handle->fetchAll(\PDO::FETCH_OBJ);
+					$result = $handle-&gt;fetchAll(\PDO::FETCH_OBJ);
 					?&gt;&lt;!doctype html&gt;
 					&lt;html&gt;
 						&lt;head&gt;
@@ -669,11 +669,12 @@
 						&lt;body&gt;
 							&lt;?php
 							foreach($result as $row){
-								print($row->Body);  // This should correctly output our transformed UTF-8 string to the browser
+								print($row-&gt;Body);  // This should correctly output our transformed UTF-8 string to the browser
 							}
 							?&gt;
 						&lt;/body&gt;
-					&lt;/html&gt;</code>
+					&lt;/html&gt;
+				</code>
 				<h4 id="utf8-further-reading">더 읽을거리</h4>
 				<ul>
 					<li><a href="http://php.net/ref.mbstring">PHP: Multibyte String Functions - Manual</a></li>
@@ -696,16 +697,16 @@
 					$date = new DateTime('2011-05-04 05:00:00', new DateTimeZone('UTC'));
 
 					// Add ten days to our initial date
-					$date->add(new DateInterval('P10D'));
+					$date-&gt;add(new DateInterval('P10D'));
 
-					echo($date->format('Y-m-d h:i:s')); // 2011-05-14 05:00:00
+					echo($date-&gt;format('Y-m-d h:i:s')); // 2011-05-14 05:00:00
 
 					// Sadly we don't have a Middle Earth timezone
 					// Convert our UTC date to the PST (or PDT, depending) time zone
-					$date->setTimezone(new DateTimeZone('America/Los_Angeles'));
+					$date-&gt;setTimezone(new DateTimeZone('America/Los_Angeles'));
 
 					// Note that if you run this line yourself, it might differ by an hour depending on daylight savings
-					echo($date->format('Y-m-d h:i:s')); // 2011-05-13 10:00:00
+					echo($date-&gt;format('Y-m-d h:i:s')); // 2011-05-13 10:00:00
 
 					$later = new DateTime('2012-05-20', new DateTimeZone('UTC'));
 
@@ -714,9 +715,9 @@
 						echo('Yup, you can compare dates using these easy operators!');
 
 					// Find the difference between two dates
-					$difference = $date->diff($later);
+					$difference = $date-&gt;diff($later);
 
-					echo('The 2nd date is ' . $difference['days'] . ' later than 1st date.');
+					echo('The 2nd date is ' . $difference->days . ' later than 1st date.');
 					?&gt;
 					</code>
 				<h4>참고</h4>
@@ -748,7 +749,7 @@
 			<section id="checking-for-null">
 				<h2>값이 null인지 false인지 확인하기</h2>
 				<h3>null과 false 값을 확인할 때에는 <code><a href="http://php.net/language.operators.comparison">===</a></code> 연산자를 사용하세요.</h3>
-				<p>PHP의 느슨한 형식의 시스템<sup class="origin">loose typing system</sup>은 변수의 값을 확인하는 많은 방법을 제공합니다. 하지만 이는 많은 문제를 안고 있기도 합니다. <code><a href="http://php.net/language.operators.comparison">==</a></code> 연산자를 사용해서 값이 null인지 false인지 확인하는 것은 값이 빈 문자열이나 0일 경우에 참으로 잘못 판단<sup class="origin">false positives</sup>할 수 있습니다. <code><a href="http://php.net/function.isset">isset()</a></code>은 변수가 값을 가지고 있는지 확인하지만, 그 값이 null이나 false인지는 확인하지 <em>않기</em> 때문에 이런 경우에 사용하기에는 적당하지 않습니다.</p>
+				<p>PHP의 느슨한 형식의 시스템<sup class="origin">loose typing system</sup>은 변수의 값을 확인하는 많은 방법을 제공합니다. 하지만 이는 많은 문제를 안고 있기도 합니다. <code><a href="http://php.net/language.operators.comparison">==</a></code> 연산자를 사용해서 값이 null인지 false인지 확인하는 것은 값이 빈 문자열이나 0일 경우에 참으로 잘못 판단<sup class="origin">false positives</sup>할 수 있습니다. <code><a href="http://php.net/function.isset">isset()</a></code>은 변수가 NULL이 아닌 값을 가지고 있는지 확인하지만, 부울값 <code>false</code>인지는 확인할 수 없습니다.</p>
 				<p><code><a href="http://php.net/function.is-null">is_null()</a></code> 함수는 값이 null인지 확인하고, <code><a href="http://php.net/function.is-bool">is_bool()</a></code> 함수는 값이 (<code>false</code>와 같은) 부울 값인지 확인하지만, 더 나은 것이 있습니다. 바로 <code><a href="http://php.net/language.operators.comparison">===</a></code> 연산자입니다. <code>===</code> 연산자는 느슨한 형식의 PHP 환경에서 <em>동등한</em><sup class="origin">equivalent</sup> 것이 아니라 값이 <em>동일한지</em><sup class="origin">identical</sup> 확인합니다. 또한, <code>is_null()</code>이나 <code>is_bool()</code>보다 약간 빠르고, 비교를 위해서 함수를 사용하는 것보다 보기 좋습니다.</p>
 				<h4>예제</h4>
 				<code class="php">
@@ -798,7 +799,7 @@
 		</article>
 	</main>
 	<footer>
-		<a rel="bookmark" href="/">PHP Best Practices</a> by <a rel="author" href="https://alexcabal.com">Alex Cabal</a> is released into the <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>. <a href="https://alexcabal.com/why-i-release-things-into-the-public-domain">Why?</a>
+		<a rel="bookmark" href="/">PHP Best Practices</a> by <a href="https://alexcabal.com" rel="author">Alex Cabal</a> is released into the <a href="https://en.wikipedia.org/wiki/Public_domain">public domain</a> via the <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 Public Domain Dedication</a>. <a href="https://alexcabal.com/why-i-release-things-into-the-public-domain">Why?</a>
 	</footer>
 </body>
 
