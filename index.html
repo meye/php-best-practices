@@ -1,6 +1,5 @@
 <!doctype html>
-<html>
-
+<html lang="ko-KR">
 <head>
 	<title>PHP Best Practices: 일반적이고 복잡한 PHP 작업을 위한 짧고 실용적인 가이드</title>
 	<meta charset="utf-8" />
@@ -8,12 +7,16 @@
 	<link type="text/css" rel="stylesheet" href="css/core.css" media="screen" />
 	<link type="text/css" rel="stylesheet" href="js/syntaxhighlighter-3.0.83/styles/shCore.css" media="screen" />
 	<link type="text/css" rel="stylesheet" href="js/syntaxhighlighter-3.0.83/styles/shCoreDefault.css" media="screen" />
-	<script type="text/javascript" src="js/jquery/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="js/syntaxhighlighter-3.0.83/scripts/shCore.js"></script>
 	<script type="text/javascript" src="js/syntaxhighlighter-3.0.83/scripts/shBrushPhp.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		$('code.php').attr('class', 'php brush: php');
+	document.addEventListener("DOMContentLoaded", function(event){
+		elements = document.querySelectorAll('code.php');
+
+		for(i = 0; i < elements.length; ++i){
+			elements[i].className += " brush: php";
+		}
+
 		SyntaxHighlighter.config.tagName = 'code';
 		SyntaxHighlighter.all()
 	});
@@ -27,7 +30,6 @@
 	  ga('send', 'pageview');
 	</script>
 </head>
-
 <body>
 	<header>
 		<h1>PHP Best Practices</h1>
@@ -62,11 +64,11 @@
 			<h2>PHP Best Practices</h2>
 			<section id="maintainers">
 				<h2>최신 개정판 &amp; 관리자</h2>
-				<p>이 문서는 2014년 7월 3일에 최종 검수, 2015년 12월 8일에 최종 수정되었습니다.</p>
-				<p>이 문서는 <a href="https://alexcabal.com" rel="author">Alex Cabal</a>이 관리하고 있습니다. 오랜 기간 PHP를 작성해왔고, 현재 <a href="http://www.scribophile.com/">진지한 작가를 위한 온라인 글쓰기 그룹인 Scribophile</a>, <a href="http://writerfolio.com">프리랜서를 위한 쉬운 온라인 글쓰기 포트폴리오인 Writerfolio</a>, <a href="https://standardebooks.com">상업적인 수준의 자유로운 퍼블릭 도메인 eBook을 만드는 오픈소스 프로젝트 Standard Ebooks</a> 등을 운영하고 있습니다.</p>
+				<p>이 문서는 2016년 6월 21일에 최종 검수 및 수정되었습니다.</p>
+				<p>이 문서는 <a href="https://alexcabal.com" rel="author">Alex Cabal</a>이 관리하고 있습니다. 오랜 기간 PHP를 작성해왔고, 현재 <a href="http://www.scribophile.com/">진지한 작가를 위한 온라인 글쓰기 그룹인 Scribophile</a>, <a href="http://writerfolio.com">프리랜서를 위한 쉬운 온라인 글쓰기 포트폴리오인 Writerfolio</a>, <a href="https://standardebooks.org">진정한 애서가들을 위한 무료 eBook을 만드는 오픈소스 프로젝트 Standard Ebooks</a> 등을 운영하고 있습니다.</p>
 				<p>뭔가 도울 일이 있거나 이 문서에 어떤 제안이나 정정할 것이 있다면 <a href="https://alexcabal.com/contact/">연락주세요.</a></p>
 				<h4>한국어판 안내</h4>
-				<p>이 문서는 2015년 12월 8일에 수정된 내용을 기반으로 2015년 12월 20일에 최종 번역되었습니다. 한국어판에 대한 제안/문의는 <a href="https://github.com/meye/php-best-practices/issues">Github 저장소</a>에 이슈로 남겨주세요.</p>
+				<p>이 문서는 2016년 6월 21일에 수정된 내용을 기반으로 2017년 2월 22일에 최종 번역되었습니다. 한국어판에 대한 제안/문의는 <a href="https://github.com/meye/php-best-practices/issues">Github 저장소</a>에 이슈로 남겨주세요.</p>
 
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
@@ -94,7 +96,7 @@
 				<h2>어떤 PHP 버전을 사용하나요?</h2>
 				<h3>Ubuntu 14.04 LTS에 설치된 PHP 5.5.9-1ubuntu4.2</h3>
 				<p>PHP는 웹 세계의 100살 먹은 거북이입니다. 이 거북이의 등껍질에는 풍성하고, 복잡하며, 굴곡진 역사가 새겨져있습니다. 호스팅 환경에서는 여러분이 할 수 있는 것에 제약이 있을 수도 있습니다.</p>
-				<p>온전함을 유지하기 위해서 하나의 PHP 버전에 집중할 것입니다. 2013년 4월 30일 기준으로 <strong>PHP 5.5.9-1ubuntu4.2</strong>가 그렇습니다. 이것은 <strong>Ubuntu 14.04 LTS</strong> 서버에서 apt-get을 사용할때 설치되는 버전입니다. 다시 말하면, 많은 사람들이 사용하는 온전한 초기값입니다.</p>
+				<p>온전함을 유지하기 위해서 하나의 PHP 버전에 집중할 것입니다. <strong>PHP 5.5.9-1ubuntu4.2</strong>가 그렇습니다. 이것은 <strong>Ubuntu 14.04 LTS</strong> 서버에서 apt-get을 사용할때 설치되는 버전입니다. 다시 말하면, 많은 사람들이 사용하는 온전한 초기값입니다.</p>
 				<p>여기에 소개하는 어떤 해결방법은 다른 버전이나 오래된 버전의 PHP에서 잘 동작하는 것을 발견할지도 모릅니다. 그런 경우, <em>오래된 버전에 숨어있는 버그나 보안 문제들을 확인하는 것은 여러분의 몫입니다.</em></p>
 				<aside>
 					<h3>Ubuntu 12.04 LTS를 위한 안내</h3>
@@ -194,6 +196,7 @@
 						// PHP bug: if you don't specify PDO::PARAM_INT, PDO may enclose the argument in quotes.  This can mess up some MySQL queries that don't expect integers to be quoted.
 						// See: https://bugs.php.net/bug.php?id=44639
 						// If you're not sure whether the value you're passing is an integer, use the is_int() function.
+						// (This bug was fixed in Oct. 2016, but the fix is not applied to the version of PHP used in this document; see https://bugs.php.net/bug.php?id=73234)
 						$handle-&gt;bindValue(1, 100, PDO::PARAM_INT);
 						$handle-&gt;bindValue(2, 'Bilbo Baggins');
 						$handle-&gt;bindValue(3, 5, PDO::PARAM_INT);
@@ -234,7 +237,8 @@
 			<section id="php-tags">
 				<h2>PHP 태그</h2>
 				<h3>&lt;?php ?&gt;를 사용하세요.</h3>
-				<p>PHP 구역을 정하는 방법은 다음과 같은 몇가지 방법이 있습니다. <code>&lt;?php ?&gt;</code>, <code>&lt;?= ?&gt;</code>, <code>&lt;? ?&gt;</code>, <code>&lt;% %&gt;</code>. 짧은 것이 입력하기에는 더 편리하겠지만, 모든 PHP 서버에서 동작하는 것을 보장하는 것은 <code>&lt;?php ?&gt;</code> 뿐입니다. PHP 코드를 여러분이 통제할 수 없는 서버에 배포할 계획이라면, 반드시 <code>&lt;?php ?&gt;</code>를 사용하세요.</p>
+				<p>PHP 구역을 정하는 방법은 다음과 같은 몇가지 방법이 있습니다. <code>&lt;?php ?&gt;</code>, <code>&lt;?= ?&gt;</code>, <code>&lt;? ?&gt;</code>, <code>&lt;% %&gt;</code>. 짧은 것이 입력하기에는 더 편리하겠지만, 이 태그들은 비활성화되어있는 것이 기본값이고 PHP 서버에 <code>short_open_tag</code> 옵션을 설정해서 활성화시켜야 사용할 수 있습니다. 모든 PHP 서버에서 동작하는 것을 보장하는 것은 <code>&lt;?php ?&gt;</code> 뿐입니다. PHP 코드를 여러분이 통제할 수 없는 서버에 배포할 계획이라면, 반드시 <code>&lt;?php ?&gt;</code>를 사용하세요.</p>
+				<p>다행히도 <code>&lt;?=</code> 태그는 짧은 태그 활성화 설정 여부와 관계없이 사용가능하므로, 언제든지 안심하고 <code>&lt;?php echo() ?&gt;</code> 와 같은 코드 대신에 짧은 태그를 사용할 수 있습니다.</p>
 				<p>여러분을 위해서 코딩하면서 사용하는 PHP 설정을 통제할 수 있다면, 짧은 태그가 편리할 수 있습니다. 하지만 <code>&lt;? ?&gt;</code>는 XML 선언과 겹치고, <code>&lt;% %&gt;</code>는 사실 ASP 스타일입니다.</p>
 				<p>무엇을 선택하든지, 한가지로 일관되게 사용하세요!</p>
 				<h4>참고</h4>
@@ -388,21 +392,33 @@
 				<code class="php">
 					&lt;?php
 					// Store some values in the APCu cache.  We can optionally pass a time-to-live, but in this example the values will live forever until they're garbage-collected by APCu.
-					apc_store('username-1532', 'Frodo Baggins');
-					apc_store('username-958', 'Aragorn');
-					apc_store('username-6389', 'Gandalf');
+					apcu_store('username-1532', 'Frodo Baggins');
+					apcu_store('username-958', 'Aragorn');
+					apcu_store('username-6389', 'Gandalf');
+
+					// You can store arrays and objects too.
+					apcu_store('creatures', array('ent', 'dwarf', 'elf'));
+					apcu_store('saruman', new Wizard());
 
 					// After storing these values, any PHP script can access them, no matter when it's run!
-					$value = apc_fetch('username-958', $success);
+					$value = apcu_fetch('username-958', $success);
 					if($success === true)
 						print($value); // Aragorn
 
-					$value = apc_fetch('username-1', $success); // $success will be set to boolean false, because this key doesn't exist.
+					$value = apcu_fetch('creatures', $success);
+					if($success === true)
+						print_r($value);
+
+					$value = apcu_fetch('username-1', $success); // $success will be set to boolean false, because this key doesn't exist.
 					if($success !== true) // Note the !==, this checks for true boolean false, not "falsey" values like 0 or empty string.
 						print('Key not found');
 
-					apc_delete('username-958'); // This key will no longer be available.
+					apcu_delete('username-958'); // This key will no longer be available.
 					?&gt;</code>
+				<h4>참고</h4>
+				<ul>
+					<li>16.04 이전 APUc 버전에서 APCu 코드를 마이그레이션한다면, 함수 이름이 <code>apc_*</code> 에서 <code>apcu_*</code> 로 바뀐 것에 주의하세요. 예를 들어 <code>apc_store()</code> 는 <code>apcu_store()</code> 로 바뀌었습니다.</li>
+				</ul>
 				<h4>더 읽을거리</h4>
 				<ul>
 					<li><a href="http://php.net/book.memcached">PHP: Memcached - Manual</a></li>
@@ -410,16 +426,6 @@
 					<li><a href="http://stackoverflow.com/questions/1442411/using-memcache-vs-memcached-with-php">Stack Overflow: Using Memcache vs Memcached with PHP</a></li>
 					<li><a href="http://stackoverflow.com/questions/815041/memcached-vs-apc-which-one-should-i-choose">Stack Overflow: Memcached vs APC, which one should I choose?</a></li>
 				</ul>
-				<aside>
-					<h3>Ubuntu 12.04 (PHP &lt;= 5.3.10)</h3>
-					<h3>Memcached 대신에 <a href="http://php.net/book.apc">APC</a>를 사용하세요.</h3>
-					<p>Ubuntu 12.04에서 키-값 저장소와 opcode 캐시로 APC를 사용한다면, (APC와 APCu는 API가 동일하기때문에) 위의 예제도 잘 동작합니다. (음.. <em>거의</em> 동일합니다. APC 함수 <code>apc_define_constants</code>, <code>apc_load_constants</code>는 APCu로 포팅되지 않았습니다.)</p>
-					<p>Ubuntu 12.04에 APC를 설치하는 방법에 대해서는 <a href="#opcode-cache">opcode 캐시 부분</a>을 참고하세요.</p>
-					<h4>더 읽을거리</h4>
-					<ul>
-						<li><a href="http://php.net/book.apc">PHP: APC - Manual</a></li>
-					</ul>
-				</aside>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
 			<section id="regex">
@@ -463,7 +469,7 @@
 						&lt;/FilesMatch&gt;
 					&lt;/VirtualHost&gt;</code>
 				<p>마지막으로, Apache와 FPM 프로세스를 재시작합니다.</p>
-				<code class="terminal">sudo service apache2 restart && sudo service php5-fpm restart</code>
+				<code class="terminal">sudo service apache2 restart &amp;&amp; sudo service php5-fpm restart</code>
 				<h4>참고</h4>
 				<ul>
                     <li><code><a href="http://httpd.apache.org/docs/2.4/mod/core.html#sethandler">SetHandler</a></code> 디렉티브(directive) 대신에 <code><a href="http://httpd.apache.org/docs/2.4/mod/mod_mime.html#addhandler">AddHandler</a></code> 디렉티브를 사용하는 것은 보안 위험이 있습니다. <code>AddHandler</code>는 ".php"를 <em>파일 이름 중 어디에든 포함한</em> 파일 안의 PHP 코드를 실행할 것 입니다. 그래서 사용자가 파일 업로드 폼(form)을 사용해서 evil.php.gif 파일을 업로드 하면, 예기치못한 불쾌한 일을 당할지도 모릅니다.</li>
@@ -612,6 +618,11 @@
 				<p>모든 문자열 함수에 <code>mb_*</code> 대응 함수가 있는 것은 아닙니다. 여러분이 하려는 것에 대응 함수가 없다면, 운이 없다고 생각하세요.</p>
 				<p>그리고, 작성하는 모든 PHP 스크립트 상단에 (또는, 전역으로 포함하는 스크립트의 상단에) <code><a href="http://php.net/function.mb-internal-encoding">mb_internal_encoding()</a></code> 함수를 사용하세요. 스크립트가 브라우저에 출력한다면, 바로 뒤에 <code><a href="http://php.net/function.mb-http-output">mb_http_output()</a></code> 함수를 사용하세요. 모든 스크립트에 문자열의 인코딩을 명시적으로 정의하는 것이 앞으로 있을 수 있는 많은 두통거리를 막아줍니다.</p>
 				<p>마지막으로, 문자열을 다루는 많은 PHP 함수들은 문자 인코딩을 지정할 수 있는 부가<sup class="origin">optional</sup> 매개변수가 있습니다. 가능할 경우, 항상 명시적으로 UTF-8을 지정하세요. 예를 들어 <code><a href="http://php.net/function.htmlentities">htmlentities()</a></code>는 문자 인코딩을 위한 옵션이 있는데, UTF-8 문자열을 다룰때에는 <em>항상</em> UTF-8을 명시적으로 지정하세요.</p>
+				<h4>OS에서의 UTF-8</h4>
+				<p>종종 파일명이나 그 내용이 유니코드로 인코딩된 파일들을 발견하게 될 것입니다. PHP는 리눅스나 윈도우즈를 포함하여 여러가지 운영체제에서 동작하지만, 슬프게도 각 운영체제의 특성에 의해서 각 플랫폼별로 다르게 유니코드 파일명을 취급합니다.</p>
+				<p>리눅스나 OSX는 UTF-8 파일명을 적절히 잘 다루고 있는 것으로 보이지만, 윈도우즈는 그렇지 못합니다. 만약 윈도우즈에서 PHP를 사용해서 아스키 문자가 아닌 문자의 파일명으로 파일을 저장한다면, 아마도 이상하게 깨진 문자로 파일명이 표시되는 것을 보게될 것입니다.</p>
+				<p>간단한 방법은 아니지만, 이식성을 갖는 방법은 다음과 같습니다. 리눅스나 OSX에서는 파일이름을 UTF-8로 인코딩할 수 있지만, 윈도우즈에서는 ISO-8859-1로 인코딩해야합니다.</p>
+				<p>만약에 윈도우즈에서 동작하고 있는지 확인하는 번거로움을 피하고 싶다면, 파일을 저장하기 전에 파일명을 항상 URL encode 할 수도 있습니다. 이것은 아스키코드로 유니코드 문자를 표기하여, 플랫폼에 따른 유니코드 특성을 우회하는 효과적인 방법입니다.</p>
 				<h4>MySQL에서의 UTF-8</h4>
 				<p>PHP 스크립트가 MySQL에 접속한다면, 위에서 다룬 모든 예방 조치를 하더라도 데이터베이스에 비 UTF-8 문자열로 저장될 가능성이 있습니다.</p>
 				<p>PHP에서 MySQL로 문자열을 확실하게 UTF-8로 전달하기 위해서, 데이터베이스와 테이블 모두 utf8mb4 문자셋<sup class="origin">character set</sup>과 collation으로 설정하고, PDO 연결 문자열<sup class="origin">PDO connection string</sup>에서도 utf8mb4 문자셋을 사용하세요. 예제는 <a href="#mysql">MySQL 데이터베이스에 연결하고 쿼리하기</a> 항목을 참고하세요. 이것은 <em>정말 중요합니다</em>.</p>
@@ -682,6 +693,7 @@
 					<li><a href="http://stackoverflow.com/questions/571694/what-factors-make-php-unicode-incompatible">Stack Overflow: What factors make PHP Unicode-incompatible?</a></li>
 					<li><a href="http://stackoverflow.com/questions/140728/best-practices-in-php-and-mysql-with-international-strings">Stack Overflow: Best practices in PHP and MySQL with international strings</a></li>
 					<li><a href="http://mathiasbynens.be/notes/mysql-utf8mb4">How to support full Unicode in MySQL databases</a></li>
+					<li><a href="https://evertpot.com/filesystem-encoding-and-php/">Filesystem encoding and PHP</a></li>
 				</ul>
 				<p class="back"><a href="#">위로 이동</a></p>
 			</section>
@@ -717,7 +729,7 @@
 					// Find the difference between two dates
 					$difference = $date-&gt;diff($later);
 
-					echo('The 2nd date is ' . $difference->days . ' later than 1st date.');
+					echo('The 2nd date is ' . $difference-&gt;days . ' later than 1st date.');
 					?&gt;
 					</code>
 				<h4>참고</h4>
@@ -729,7 +741,7 @@
 						<p><code>DateTime::__construct()</code>에 유닉스 타임 스탬프<sup class="origin">timestamp</sup>를 사용하면, 두번째 매개변수에 어떤 값이 있든지 시간대는 항상 UTC 로 설정됩니다.</p>
 					</li>
 					<li>
-						<p><code>DateTime::__construct()</code>에 0으로 된 날짜(예. &quot;0000-00-00&quot;, 보통 MySQL이 DateTime 컬럼의 기본 값으로 생성하는 값)를 넘기면, &quot;0000-00-00&quot;이 아니라 엉뚱한 날짜가 됩니다.</p>
+						<p><code>DateTime::__construct()</code>에 0으로 된 날짜(예. “0000-00-00”, 보통 MySQL이 DateTime 컬럼의 기본 값으로 생성하는 값)를 넘기면, “0000-00-00”이 아니라 엉뚱한 날짜가 됩니다.</p>
 					</li>
 					<li>
 						<p>32비트 시스템에서 <code><a href="http://php.net/datetime.gettimestamp">DateTime::getTimestamp()</a></code>는 2038년 이후의 시간은 표시하지 못합니다. 64비트 시스템은 문제 없습니다.</p>
@@ -799,7 +811,7 @@
 		</article>
 	</main>
 	<footer>
-		<a rel="bookmark" href="/">PHP Best Practices</a> by <a href="https://alexcabal.com" rel="author">Alex Cabal</a> is released into the <a href="https://en.wikipedia.org/wiki/Public_domain">public domain</a> via the <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 Public Domain Dedication</a>. <a href="https://alexcabal.com/why-i-release-things-into-the-public-domain">Why?</a>
+		<a rel="bookmark" href="/">PHP Best Practices</a> by <a href="https://alexcabal.com" rel="author">Alex Cabal</a> is dedicated to the <a href="https://en.wikipedia.org/wiki/Public_domain">public domain</a> via the <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0 Universal Public Domain Dedication</a>, and is thus free of copyright restrictions worldwide. <a href="https://alexcabal.com/why-i-release-things-into-the-public-domain">Why?</a>
 	</footer>
 </body>
 
